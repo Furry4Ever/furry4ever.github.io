@@ -175,7 +175,7 @@
           <img src="Furry4Ever.png" alt="Furry4Ever Logo" style="max-height: 50px; width: auto;" class="object-contain" />
           <div class="flex flex-col">
             <span class="font-display font-extrabold text-lg sm:text-2xl text-[#135c59] tracking-tight leading-none">
-              <span>Furry</span><span class="text-[#e05a5a]">4</span><span class="text-[#d9822b]">Ever</span>
+              Furry4Ever
             </span>
             <span class="text-[9px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#d9822b] mt-0.5 whitespace-nowrap">
               PETS VETERINARY CARE
@@ -189,7 +189,6 @@
             <span>Services</span>
             <i class="fa-solid fa-chevron-down text-xs text-[#135c59]"></i>
           </button>
-          <a href="#knowledge" class="text-[#2d2420]/80 hover:text-[#135c59] text-sm font-semibold transition-colors">Knowledge</a>
           <a href="#about" class="text-[#2d2420]/80 hover:text-[#135c59] text-sm font-semibold transition-colors">About Us</a>
         </nav>
 
@@ -284,13 +283,19 @@
               Specialized veterinary care for your beloved pets
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 mb-10">
-              <button onclick="openBookingModal()" class="btn-primary text-base py-3.5 px-8">
-                <i class="fa-solid fa-calendar-check text-lg"></i>
-                <span>Book an Appointment</span>
-              </button>
-              <button onclick="openServicesModal()" class="btn-secondary text-base py-3.5 px-8">
-                <i class="fa-solid fa-stethoscope text-lg"></i>
+            <div class="flex flex-col gap-3 mb-10 max-w-2xl">
+              <div class="grid grid-cols-2 gap-3">
+                <button onclick="openBookingModal()" class="btn-primary text-sm sm:text-base py-3.5 px-3 sm:px-6 justify-center">
+                  <i class="fa-solid fa-calendar-check"></i>
+                  <span>Book an Appointment</span>
+                </button>
+                <button onclick="openShopModal()" class="btn-secondary text-sm sm:text-base py-3.5 px-3 sm:px-6 justify-center">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  <span>Shop Now</span>
+                </button>
+              </div>
+              <button onclick="openServicesModal()" class="btn-secondary text-sm sm:text-base py-3.5 px-3 sm:px-6 justify-center w-full">
+                <i class="fa-solid fa-stethoscope"></i>
                 <span>View Services</span>
               </button>
             </div>
@@ -370,101 +375,7 @@
     </section>
 
     <!-- KNOWLEDGE BASE SECTION -->
-    <section id="knowledge" class="py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-          <div>
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#135c59]/10 text-[#135c59] rounded-full text-xs font-bold uppercase tracking-wider mb-4">
-              <i class="fa-solid fa-book-open text-[#d9822b]"></i>
-              <span>Educational Resources</span>
-            </div>
-            <h2 class="text-3xl md:text-5xl font-display font-bold text-[#135c59]">
-              Pet Healthcare <span class="text-[#d9822b]">Knowledge Hub</span>
-            </h2>
-          </div>
-          <div class="flex items-center gap-2 px-5 py-2.5 bg-[#fbf9f5] border border-[#135c59]/15 text-[#135c59] rounded-full text-sm font-bold">
-            <i class="fa-solid fa-book text-[#d9822b]"></i>
-            <span>Pet Owner Guide</span>
-          </div>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-          <!-- Article 1 -->
-          <div onclick="openKnowledgeModal(1)" class="group cursor-pointer p-5 rounded-3xl bg-[#fbf9f5] border border-[#135c59]/10 hover:border-[#135c59]/30 transition-all hover:shadow-lg">
-            <div class="relative aspect-[16/10] rounded-2xl overflow-hidden mb-5">
-              <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop" alt="Understanding Pet Body Language" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
-                <span class="bg-[#d9822b] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Behavior</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-2 text-[#2d2420]/60 text-xs font-bold uppercase tracking-wider mb-2">
-              <i class="fa-solid fa-clock"></i>
-              <span>5 min read</span>
-            </div>
-            <h3 class="text-xl font-display font-bold text-[#135c59] group-hover:text-[#d9822b] transition-colors mb-2">
-              Understanding Pet Body Language
-            </h3>
-            <p class="text-xs text-[#2d2420]/75 leading-relaxed line-clamp-2">
-              From tail flicks to ear positions, learn what your cat and dog are trying to tell you.
-            </p>
-            <div class="mt-4 flex items-center gap-2 text-[#d9822b] font-bold text-xs">
-              <span>Read Full Article</span>
-              <i class="fa-solid fa-chevron-right group-hover:translate-x-1 transition-transform"></i>
-            </div>
-          </div>
-
-          <!-- Article 2 -->
-          <div onclick="openKnowledgeModal(2)" class="group cursor-pointer p-5 rounded-3xl bg-[#fbf9f5] border border-[#135c59]/10 hover:border-[#135c59]/30 transition-all hover:shadow-lg">
-            <div class="relative aspect-[16/10] rounded-2xl overflow-hidden mb-5">
-              <img src="https://images.unsplash.com/photo-1513245543132-31f507417b26?q=80&w=1935&auto=format&fit=crop" alt="Senior Pet Wellness" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
-                <span class="bg-[#d9822b] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Health</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-2 text-[#2d2420]/60 text-xs font-bold uppercase tracking-wider mb-2">
-              <i class="fa-solid fa-clock"></i>
-              <span>8 min read</span>
-            </div>
-            <h3 class="text-xl font-display font-bold text-[#135c59] group-hover:text-[#d9822b] transition-colors mb-2">
-              Senior Pet Wellness & Routine Checks
-            </h3>
-            <p class="text-xs text-[#2d2420]/75 leading-relaxed line-clamp-2">
-              Why aging pets need regular diagnostic monitoring twice a year.
-            </p>
-            <div class="mt-4 flex items-center gap-2 text-[#d9822b] font-bold text-xs">
-              <span>Read Full Article</span>
-              <i class="fa-solid fa-chevron-right group-hover:translate-x-1 transition-transform"></i>
-            </div>
-          </div>
-
-          <!-- Article 3 -->
-          <div onclick="openKnowledgeModal(3)" class="group cursor-pointer p-5 rounded-3xl bg-[#fbf9f5] border border-[#135c59]/10 hover:border-[#135c59]/30 transition-all hover:shadow-lg">
-            <div class="relative aspect-[16/10] rounded-2xl overflow-hidden mb-5">
-              <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=2070&auto=format&fit=crop" alt="Stress Free Home" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
-                <span class="bg-[#d9822b] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Lifestyle</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-2 text-[#2d2420]/60 text-xs font-bold uppercase tracking-wider mb-2">
-              <i class="fa-solid fa-clock"></i>
-              <span>6 min read</span>
-            </div>
-            <h3 class="text-xl font-display font-bold text-[#135c59] group-hover:text-[#d9822b] transition-colors mb-2">
-              Creating a Stress-Free  Pet Home Environment
-            </h3>
-            <p class="text-xs text-[#2d2420]/75 leading-relaxed line-clamp-2">
-              Simple environmental enrichment to keep your pets happy, active, and safe.
-            </p>
-            <div class="mt-4 flex items-center gap-2 text-[#d9822b] font-bold text-xs">
-              <span>Read Full Article</span>
-              <i class="fa-solid fa-chevron-right group-hover:translate-x-1 transition-transform"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
+</main>
 
   <!-- BOTTOM INFORMATION BAR / FOOTER -->
   <footer class="bg-[#135c59] text-white pt-16 pb-8">
@@ -503,7 +414,6 @@
           <ul class="space-y-2.5 text-sm text-white/80">
             <li><button onclick="openServicesModal()" class="hover:text-white transition-colors">Services Menu</button></li>
             <li><a href="#about" class="hover:text-white transition-colors">About Furry4Ever</a></li>
-            <li><a href="#knowledge" class="hover:text-white transition-colors">Pet Healthcare Articles</a></li>
             <li><button onclick="openBookingModal()" class="hover:text-white transition-colors">Book a Home Visit</button></li>
           </ul>
         </div>
@@ -679,10 +589,6 @@
               <h3 class="text-lg font-display font-bold text-[#135c59] mb-1.5">Comprehensive Check-ups</h3>
               <p class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Thorough medical health assessments in the comfort and peace of your home.</p>
             </div>
-            <button onclick="closeServicesModal(); openBookingModal();" class="w-full py-2 px-3 rounded-xl bg-white border border-[#135c59]/20 text-[#135c59] text-xs font-bold hover:bg-[#135c59] hover:text-white transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-calendar-check"></i>
-              <span>Book This Service</span>
-            </button>
           </div>
 
           <!-- Service 2 -->
@@ -696,10 +602,6 @@
               <h3 class="text-lg font-display font-bold text-[#135c59] mb-1.5">Vaccinations & Care</h3>
               <p class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Essential preventive immunizations administered by veterinary professionals at home.</p>
             </div>
-            <button onclick="closeServicesModal(); openBookingModal();" class="w-full py-2 px-3 rounded-xl bg-white border border-[#135c59]/20 text-[#135c59] text-xs font-bold hover:bg-[#135c59] hover:text-white transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-calendar-check"></i>
-              <span>Book This Service</span>
-            </button>
           </div>
 
           <!-- Service 3 -->
@@ -713,10 +615,6 @@
               <h3 class="text-lg font-display font-bold text-[#135c59] mb-1.5">Regular Follow-ups</h3>
               <p class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Ongoing monitoring and evaluation for post-treatment recovery and chronic conditions.</p>
             </div>
-            <button onclick="closeServicesModal(); openBookingModal();" class="w-full py-2 px-3 rounded-xl bg-white border border-[#135c59]/20 text-[#135c59] text-xs font-bold hover:bg-[#135c59] hover:text-white transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-calendar-check"></i>
-              <span>Book This Service</span>
-            </button>
           </div>
 
           <!-- Service 4 -->
@@ -731,10 +629,6 @@
               <h3 class="text-lg font-display font-bold text-[#135c59] mb-1.5">Specialized Nursing Care</h3>
               <p class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Dedicated nursing support for senior pets and recovering animals requiring extra gentle care.</p>
             </div>
-            <button onclick="closeServicesModal(); openBookingModal();" class="w-full py-2 px-3 rounded-xl bg-white border border-[#135c59]/20 text-[#135c59] text-xs font-bold hover:bg-[#135c59] hover:text-white transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-calendar-check"></i>
-              <span>Book This Service</span>
-            </button>
           </div>
 
           <!-- Service 5 -->
@@ -748,10 +642,6 @@
               <h3 class="text-lg font-display font-bold text-[#135c59] mb-1.5">Hygienic Grooming</h3>
               <p class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Gentle, stress-free grooming and sanitary care designed to keep pets clean and comfortable.</p>
             </div>
-            <button onclick="closeServicesModal(); openBookingModal();" class="w-full py-2 px-3 rounded-xl bg-white border border-[#135c59]/20 text-[#135c59] text-xs font-bold hover:bg-[#135c59] hover:text-white transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-calendar-check"></i>
-              <span>Book This Service</span>
-            </button>
           </div>
 
         </div>
