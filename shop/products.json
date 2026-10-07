@@ -1,10 +1,10 @@
-[
-  {
-    "id": "nail-clipper",
-    "name": "قصافة أظافر للحيوانات الأليفة",
-    "category": "Grooming",
-    "image": "products/nail-clipper/image.jpg",
-    "description": "قصافة أظافر للحيوانات الأليفة مع مبرد أظافر.",
-    "available": true
-  }
-]
+{
+  "products": [
+    {
+      "slug": "nail-clipper",
+      "name": "قصافة أظافر للحيوانات الأليفة",
+      "category": "Grooming",
+      "image": "image.jpg"
+    }
+  ]
+}
