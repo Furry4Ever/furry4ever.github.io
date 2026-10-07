@@ -114,10 +114,6 @@
       transform: translateY(-2px);
     }
 
-    body.rtl-mode { direction: rtl; }
-    body.rtl-mode .text-left { text-align: right; }
-    body.rtl-mode input, body.rtl-mode textarea, body.rtl-mode select { text-align: right; }
-
     /* Modal Backdrop Blur */
     .modal-backdrop {
       background-color: rgba(45, 36, 32, 0.6);
@@ -190,14 +186,13 @@
         <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center gap-8">
           <button onclick="openServicesModal()" class="text-[#2d2420]/80 hover:text-[#135c59] text-sm font-semibold transition-colors flex items-center gap-1.5">
-            <span data-en="Services" data-ar="الخدمات">Services</span>
+            <span>Services</span>
             <i class="fa-solid fa-chevron-down text-xs text-[#135c59]"></i>
           </button>
         </nav>
 
         <!-- Right Action Items (Socials & Top Book Button) -->
         <div class="hidden sm:flex items-center gap-3">
-          <button id="language-toggle" onclick="toggleLanguage()" class="px-3 py-2 rounded-full border border-[#135c59]/15 bg-white/70 text-[#135c59] text-xs font-extrabold hover:bg-[#135c59]/5 transition-colors" aria-label="Switch language">العربية</button>
           <a href="https://www.facebook.com/profile.php?id=61592649189328" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-[#135c59]/5 hover:bg-[#135c59]/10 flex items-center justify-center text-[#135c59] transition-colors" title="Facebook">
             <i class="fa-brands fa-facebook-f text-base"></i>
           </a>
@@ -208,7 +203,7 @@
           <!-- Top Shop + Appointment CTA Buttons -->
           <button onclick="openShopModal()" class="btn-secondary text-sm py-2.5 px-5">
             <i class="fa-solid fa-cart-shopping text-sm"></i>
-            <span data-en="Shop" data-ar="المتجر">Shop</span>
+            <span>Shop</span>
           </button>
           <button onclick="openBookingModal()" class="btn-primary text-sm py-2.5 px-5">
             <i class="fa-solid fa-calendar-check text-sm"></i>
@@ -227,12 +222,12 @@
     <!-- Mobile Dropdown Navigation -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-[#135c59]/10 bg-[#fbf9f5] px-4 pt-4 pb-6 space-y-3 shadow-lg">
       <button onclick="openServicesModal(); toggleMobileMenu();" class="w-full text-left py-2 text-[#2d2420] font-semibold flex items-center justify-between">
-        <span data-en="Services" data-ar="الخدمات">Services</span>
+        <span>Services</span>
         <i class="fa-solid fa-chevron-right text-xs text-[#135c59]"></i>
       </button>
       <button onclick="openShopModal(); toggleMobileMenu();" class="w-full text-left py-2 text-[#2d2420] font-semibold flex items-center gap-2">
         <i class="fa-solid fa-cart-shopping text-[#135c59]"></i>
-        <span data-en="Shop" data-ar="المتجر">Shop</span>
+        <span>Shop</span>
       </button>
       <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-[#2d2420] font-semibold">About Us</a>
       
@@ -250,7 +245,7 @@
         <div class="flex items-center gap-2">
           <button onclick="openShopModal(); toggleMobileMenu();" class="btn-secondary text-xs py-3 px-3 flex-1 justify-center">
             <i class="fa-solid fa-cart-shopping"></i>
-            <span data-en="Shop" data-ar="المتجر">Shop</span>
+            <span>Shop</span>
           </button>
           <button onclick="openBookingModal(); toggleMobileMenu();" class="btn-primary text-xs py-3 px-3 flex-1 justify-center">
             <i class="fa-solid fa-calendar-check"></i>
@@ -290,16 +285,16 @@
               <div class="grid grid-cols-2 gap-3">
                 <button onclick="openBookingModal()" class="btn-primary text-sm sm:text-base py-3.5 px-3 sm:px-6 justify-center">
                   <i class="fa-solid fa-calendar-check"></i>
-                  <span>data-en="Book an Appointment" data-ar="احجز موعدًا">Book an Appointment</span>
+                  <span>Book an Appointment</span>
                 </button>
                 <button onclick="openShopModal()" class="btn-secondary text-sm sm:text-base py-3.5 px-3 sm:px-6 justify-center">
                   <i class="fa-solid fa-cart-shopping"></i>
-                  <span>data-en="Shop Now" data-ar="تسوق الآن">Shop Now</span>
+                  <span>Shop Now</span>
                 </button>
               </div>
               <button onclick="openServicesModal()" class="btn-secondary text-sm sm:text-base py-3.5 px-3 sm:px-6 justify-center w-full">
                 <i class="fa-solid fa-stethoscope"></i>
-                <span>data-en="View Services" data-ar="عرض الخدمات">View Services</span>
+                <span>View Services</span>
               </button>
             </div>
 
@@ -309,19 +304,19 @@
                 <div class="p-2 rounded-xl bg-[#135c59]/10 text-[#135c59] w-9 h-9 flex items-center justify-center">
                   <i class="fa-solid fa-house text-sm"></i>
                 </div>
-                <span class="text-xs font-bold text-[#2d2420]/80">data-en="Home Visits" data-ar="زيارات منزلية">Home Visits</span>
+                <span class="text-xs font-bold text-[#2d2420]/80">Home Visits</span>
               </div>
               <div class="flex items-center gap-2.5">
                 <div class="p-2 rounded-xl bg-[#e05a5a]/10 text-[#e05a5a] w-9 h-9 flex items-center justify-center">
                   <i class="fa-solid fa-heart text-sm"></i>
                 </div>
-                <span class="text-xs font-bold text-[#2d2420]/80">data-en="Stress-Free Care" data-ar="رعاية بدون توتر">Stress-Free Care</span>
+                <span class="text-xs font-bold text-[#2d2420]/80">Stress-Free Care</span>
               </div>
               <div class="flex items-center gap-2.5 col-span-2 sm:col-span-1">
                 <div class="p-2 rounded-xl bg-[#d9822b]/10 text-[#d9822b] w-9 h-9 flex items-center justify-center">
                   <i class="fa-solid fa-user-doctor text-sm"></i>
                 </div>
-                <span class="text-xs font-bold text-[#2d2420]/80">data-en="Professional Care" data-ar="رعاية احترافية">Professional Care</span>
+                <span class="text-xs font-bold text-[#2d2420]/80">Professional Care</span>
               </div>
             </div>
           </div>
@@ -337,43 +332,65 @@
       </div>
     </section>
 
-    <!-- WHY FURRY4EVER SECTION -->
-    <section id="why-furry4ever" class="py-16 bg-white/60 border-y border-[#135c59]/10">
+    <!-- ABOUT / VALUE PROPOSITION SECTION -->
+    <section id="about" class="py-16 bg-white/60 border-y border-[#135c59]/10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-10">
-          <h2 class="text-3xl sm:text-4xl font-display font-bold text-[#135c59] mb-4" data-en="Why Furry4Ever?" data-ar="لماذا Furry4Ever؟">Why Furry4Ever?</h2>
-          <p class="text-[#2d2420]/75 text-base sm:text-lg" data-en="Professional care, convenient home visits, essential pet products, and easy support — all in one place." data-ar="رعاية بيطرية احترافية، زيارات منزلية مريحة، مستلزمات أساسية للحيوانات الأليفة، ودعم سهل — كل ذلك في مكان واحد.">Professional care, convenient home visits, essential pet products, and easy support — all in one place.</p>
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <h2 class="text-3xl sm:text-4xl font-display font-bold text-[#135c59] mb-4">
+            Compassionate Home-Visit Veterinary Care
+          </h2>
+          <p class="text-[#2d2420]/75 text-base sm:text-lg">
+            We understand that hospital trips can be stressful for your pets. Our veterinary team brings professional health assessments, vaccinations, and specialized nursing directly to your home.
+          </p>
+        </div></div>
+    </section>
+
+    <!-- KNOWLEDGE BASE SECTION -->
+
+    <!-- WHY FURRY4EVER -->
+    <section id="why-furry4ever" class="py-16 sm:py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10 sm:mb-12">
+          <p class="text-[#d9822b] font-bold uppercase tracking-[0.2em] text-xs sm:text-sm mb-2">Why Furry4Ever?</p>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#135c59]">Care, Convenience & Trust</h2>
         </div>
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <div class="bg-white rounded-2xl p-6 border border-[#135c59]/10 shadow-sm hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 rounded-2xl bg-[#135c59]/10 text-[#135c59] flex items-center justify-center mb-4"><i class="fa-solid fa-paw text-xl"></i></div>
-            <h3 class="font-display font-bold text-lg text-[#135c59] mb-2" data-en="Professional Veterinary Care" data-ar="رعاية بيطرية احترافية">Professional Veterinary Care</h3>
-            <p class="text-sm text-[#2d2420]/70 leading-relaxed" data-en="Thoughtful veterinary support focused on your pet's health, comfort, and wellbeing." data-ar="دعم بيطري باهتمام يركز على صحة حيوانك الأليف وراحته وجودة حياته.">Thoughtful veterinary support focused on your pet's health, comfort, and wellbeing.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="bg-white/80 rounded-3xl p-6 text-center border border-[#135c59]/10 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#135c59]/10 flex items-center justify-center text-[#135c59]">
+              <i class="fa-solid fa-paw text-2xl"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-[#2d2420] mb-2">Professional Veterinary Care</h3>
+            <p class="text-sm text-[#2d2420]/65 leading-relaxed">Professional veterinary care with your pet's comfort and wellbeing in mind.</p>
           </div>
 
-          <div class="bg-white rounded-2xl p-6 border border-[#135c59]/10 shadow-sm hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 rounded-2xl bg-[#e05a5a]/10 text-[#e05a5a] flex items-center justify-center mb-4"><i class="fa-solid fa-house text-xl"></i></div>
-            <h3 class="font-display font-bold text-lg text-[#135c59] mb-2" data-en="Home Veterinary Visits" data-ar="زيارات بيطرية منزلية">Home Veterinary Visits</h3>
-            <p class="text-sm text-[#2d2420]/70 leading-relaxed" data-en="Get veterinary care at home, where your pet can stay in a familiar and comfortable environment." data-ar="احصل على الرعاية البيطرية في المنزل، حيث يبقى حيوانك الأليف في بيئة مألوفة ومريحة.">Get veterinary care at home, where your pet can stay in a familiar and comfortable environment.</p>
+          <div class="bg-white/80 rounded-3xl p-6 text-center border border-[#135c59]/10 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#d9822b]/10 flex items-center justify-center text-[#d9822b]">
+              <i class="fa-solid fa-house text-2xl"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-[#2d2420] mb-2">Home Veterinary Visits</h3>
+            <p class="text-sm text-[#2d2420]/65 leading-relaxed">Convenient veterinary visits at home, where your pet feels safe and comfortable.</p>
           </div>
 
-          <div class="bg-white rounded-2xl p-6 border border-[#135c59]/10 shadow-sm hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 rounded-2xl bg-[#d9822b]/10 text-[#d9822b] flex items-center justify-center mb-4"><i class="fa-solid fa-cart-shopping text-xl"></i></div>
-            <h3 class="font-display font-bold text-lg text-[#135c59] mb-2" data-en="Pet Products" data-ar="مستلزمات الحيوانات الأليفة">Pet Products</h3>
-            <p class="text-sm text-[#2d2420]/70 leading-relaxed" data-en="Browse useful pet essentials and order what you need with simple WhatsApp support." data-ar="تصفح مستلزمات مفيدة للحيوانات الأليفة واطلب ما تحتاجه بسهولة عبر دعم واتساب.">Browse useful pet essentials and order what you need with simple WhatsApp support.</p>
+          <div class="bg-white/80 rounded-3xl p-6 text-center border border-[#135c59]/10 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#e05a5a]/10 flex items-center justify-center text-[#e05a5a]">
+              <i class="fa-solid fa-bag-shopping text-2xl"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-[#2d2420] mb-2">Pet Products</h3>
+            <p class="text-sm text-[#2d2420]/65 leading-relaxed">Useful pet products and essentials, easy to order when you need them.</p>
           </div>
 
-          <div class="bg-white rounded-2xl p-6 border border-[#135c59]/10 shadow-sm hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 rounded-2xl bg-[#135c59]/10 text-[#135c59] flex items-center justify-center mb-4"><i class="fa-brands fa-whatsapp text-xl"></i></div>
-            <h3 class="font-display font-bold text-lg text-[#135c59] mb-2" data-en="Easy Booking & Support" data-ar="حجز ودعم بسهولة عبر واتساب">Easy Booking & Support</h3>
-            <p class="text-sm text-[#2d2420]/70 leading-relaxed" data-en="Book a visit or ask about products and services directly through WhatsApp." data-ar="احجز زيارة أو استفسر عن المنتجات والخدمات مباشرة عبر واتساب.">Book a visit or ask about products and services directly through WhatsApp.</p>
+          <div class="bg-white/80 rounded-3xl p-6 text-center border border-[#135c59]/10 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#25D366]/10 flex items-center justify-center text-[#25D366]">
+              <i class="fa-brands fa-whatsapp text-2xl"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-[#2d2420] mb-2">Easy Booking & Support</h3>
+            <p class="text-sm text-[#2d2420]/65 leading-relaxed">Book a visit or ask your questions easily through WhatsApp.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- KNOWLEDGE BASE SECTION -->
 </main>
 
   <!-- BOTTOM INFORMATION BAR / FOOTER -->
@@ -466,7 +483,7 @@
           <i class="fa-solid fa-wand-magic-sparkles"></i>
           <span>Home Visit Care Request</span>
         </div>
-        <h2 class="text-2xl sm:text-3xl font-display font-bold">data-en="Book an Appointment" data-ar="احجز موعدًا">Book an Appointment</h2>
+        <h2 class="text-2xl sm:text-3xl font-display font-bold">Book an Appointment</h2>
         <p class="text-white/80 text-sm mt-1">Fill in the details below and our team will contact you promptly.</p>
       </div>
 
