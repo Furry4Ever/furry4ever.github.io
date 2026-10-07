@@ -189,10 +189,6 @@
             <span>Services</span>
             <i class="fa-solid fa-chevron-down text-xs text-[#135c59]"></i>
           </button>
-          <button onclick="openShopModal()" class="text-[#2d2420]/80 hover:text-[#135c59] text-sm font-semibold transition-colors flex items-center gap-2" aria-label="Open Shop">
-            <span>Shop</span>
-            <i class="fa-solid fa-cart-shopping text-[#135c59]"></i>
-          </button>
           <a href="#knowledge" class="text-[#2d2420]/80 hover:text-[#135c59] text-sm font-semibold transition-colors">Knowledge</a>
           <a href="#about" class="text-[#2d2420]/80 hover:text-[#135c59] text-sm font-semibold transition-colors">About Us</a>
         </nav>
@@ -206,7 +202,11 @@
             <i class="fa-brands fa-whatsapp text-lg"></i>
           </a>
 
-          <!-- Top Appointment CTA Button -->
+          <!-- Top Shop + Appointment CTA Buttons -->
+          <button onclick="openShopModal()" class="btn-secondary text-sm py-2.5 px-5">
+            <i class="fa-solid fa-cart-shopping text-sm"></i>
+            <span>Shop</span>
+          </button>
           <button onclick="openBookingModal()" class="btn-primary text-sm py-2.5 px-5">
             <i class="fa-solid fa-calendar-check text-sm"></i>
             <span>Book Appointment</span>
@@ -227,9 +227,9 @@
         <span>Services</span>
         <i class="fa-solid fa-chevron-right text-xs text-[#135c59]"></i>
       </button>
-      <button onclick="openShopModal(); toggleMobileMenu();" class="w-full text-left py-2 text-[#2d2420] font-semibold flex items-center justify-between">
-        <span>Shop</span>
+      <button onclick="openShopModal(); toggleMobileMenu();" class="w-full text-left py-2 text-[#2d2420] font-semibold flex items-center gap-2">
         <i class="fa-solid fa-cart-shopping text-[#135c59]"></i>
+        <span>Shop</span>
       </button>
       <a href="#knowledge" onclick="toggleMobileMenu()" class="block py-2 text-[#2d2420] font-semibold">Knowledge</a>
       <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-[#2d2420] font-semibold">About Us</a>
@@ -245,10 +245,16 @@
             <span>WhatsApp</span>
           </a>
         </div>
-        <button onclick="openBookingModal(); toggleMobileMenu();" class="btn-primary text-xs py-3 px-4 w-full justify-center">
-          <i class="fa-solid fa-calendar-check"></i>
-          <span>Book Appointment</span>
-        </button>
+        <div class="flex items-center gap-2">
+          <button onclick="openShopModal(); toggleMobileMenu();" class="btn-secondary text-xs py-3 px-3 flex-1 justify-center">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Shop</span>
+          </button>
+          <button onclick="openBookingModal(); toggleMobileMenu();" class="btn-primary text-xs py-3 px-3 flex-1 justify-center">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>Book Appointment</span>
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -763,35 +769,6 @@
     </div>
   </div>
 
-  <!-- MODAL: FURRY4EVER SHOP -->
-  <div id="shop-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 overflow-y-auto">
-    <div onclick="closeShopModal()" class="fixed inset-0 modal-backdrop"></div>
-    <div class="relative z-10 w-full max-w-4xl max-h-[92vh] bg-white rounded-3xl shadow-2xl border border-[#135c59]/15 overflow-hidden my-4 flex flex-col">
-      <div class="bg-[#135c59] text-white p-5 sm:p-7 relative shrink-0">
-        <button onclick="closeShopModal()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors" aria-label="Close Shop">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-        <div class="flex items-center gap-2 text-[#d9822b] text-xs font-bold uppercase tracking-wider mb-2">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span>Furry4Ever Shop</span>
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-display font-bold">Shop</h2>
-        <p class="text-white/80 text-sm mt-1">Choose a product, set the quantity, then order or ask us on WhatsApp.</p>
-      </div>
-
-      <div class="p-4 sm:p-6 overflow-y-auto">
-        <div class="relative mb-4">
-          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-[#135c59]/50"></i>
-          <input id="shop-search" type="search" placeholder="Search products..." oninput="filterShopProducts()" class="w-full pl-11 pr-4 py-3 rounded-2xl bg-[#fbf9f5] border border-[#135c59]/15 focus:outline-none focus:border-[#135c59] text-sm" />
-        </div>
-
-        <div id="shop-categories" class="flex gap-2 overflow-x-auto pb-2 mb-4"></div>
-        <div id="shop-status" class="text-xs text-[#2d2420]/60 mb-3"></div>
-        <div id="shop-products-list" class="space-y-3"></div>
-      </div>
-    </div>
-  </div>
-
   <!-- MODAL: KNOWLEDGE ARTICLE READER -->
   <div id="knowledge-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
     <div onclick="closeKnowledgeModal()" class="fixed inset-0 modal-backdrop"></div>
@@ -888,133 +865,6 @@ if (menu.classList.contains('hidden')) {
       document.getElementById('booking-form-container').classList.add('hidden');
       document.getElementById('booking-success-container').classList.remove('hidden');
     }
-
-    // Shop Modal Logic
-    let shopProducts = [];
-    let activeShopCategory = 'All';
-
-    async function loadShopProducts() {
-      const status = document.getElementById('shop-status');
-      const list = document.getElementById('shop-products-list');
-      try {
-        const response = await fetch('shop/products.json', { cache: 'no-store' });
-        if (!response.ok) throw new Error('Could not load products');
-        shopProducts = await response.json();
-        renderShopCategories();
-        renderShopProducts();
-      } catch (error) {
-        if (status) status.textContent = 'Unable to load products right now.';
-        if (list) list.innerHTML = '<div class="p-5 rounded-2xl bg-[#fbf9f5] text-center text-sm text-[#2d2420]/70">Please try again in a moment.</div>';
-      }
-    }
-
-    function openShopModal() {
-      const modal = document.getElementById('shop-modal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      document.body.style.overflow = 'hidden';
-      if (!shopProducts.length) loadShopProducts();
-      setTimeout(() => document.getElementById('shop-search')?.focus(), 150);
-    }
-
-    function closeShopModal() {
-      const modal = document.getElementById('shop-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      document.body.style.overflow = '';
-    }
-
-    function renderShopCategories() {
-      const container = document.getElementById('shop-categories');
-      if (!container) return;
-      const categories = ['All', ...new Set(shopProducts.map(p => p.category).filter(Boolean))];
-      container.innerHTML = categories.map(category => `
-        <button type="button" onclick="setShopCategory(${JSON.stringify(category)})"
-          class="shop-category-btn shrink-0 px-4 py-2 rounded-full border text-xs font-bold transition-colors ${category === activeShopCategory ? 'bg-[#135c59] text-white border-[#135c59]' : 'bg-white text-[#135c59] border-[#135c59]/20 hover:bg-[#135c59]/5'}">
-          ${escapeShopHtml(category)}
-        </button>`).join('');
-    }
-
-    function setShopCategory(category) {
-      activeShopCategory = category;
-      renderShopCategories();
-      renderShopProducts();
-    }
-
-    function filterShopProducts() {
-      renderShopProducts();
-    }
-
-    function getFilteredShopProducts() {
-      const query = (document.getElementById('shop-search')?.value || '').trim().toLowerCase();
-      return shopProducts.filter(product => {
-        const categoryMatch = activeShopCategory === 'All' || product.category === activeShopCategory;
-        const text = `${product.name || ''} ${product.category || ''} ${product.description || ''}`.toLowerCase();
-        return categoryMatch && (!query || text.includes(query));
-      });
-    }
-
-    function renderShopProducts() {
-      const list = document.getElementById('shop-products-list');
-      const status = document.getElementById('shop-status');
-      if (!list) return;
-      const products = getFilteredShopProducts();
-      if (status) status.textContent = `${products.length} product${products.length === 1 ? '' : 's'}`;
-      if (!products.length) {
-        list.innerHTML = '<div class="p-8 rounded-2xl bg-[#fbf9f5] text-center text-sm text-[#2d2420]/70">No products found.</div>';
-        return;
-      }
-      list.innerHTML = products.map(product => {
-        const safeId = `qty-${String(product.slug).replace(/[^a-zA-Z0-9_-]/g, '-')}`;
-        const unavailable = product.available === false;
-        return `
-          <article class="rounded-2xl border border-[#135c59]/10 bg-white p-3 sm:p-4 shadow-sm">
-            <div class="flex gap-3 sm:gap-4 items-center">
-              <a href="${escapeAttr(product.url || '#')}" target="_blank" rel="noopener noreferrer" class="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-xl bg-[#fbf9f5] overflow-hidden flex items-center justify-center">
-                <img src="${escapeAttr(product.image)}" alt="${escapeAttr(product.name)}" class="w-full h-full object-contain" loading="lazy">
-              </a>
-              <div class="min-w-0 flex-1">
-                <a href="${escapeAttr(product.url || '#')}" target="_blank" rel="noopener noreferrer" class="font-bold text-[#135c59] hover:text-[#0e4644] leading-snug">${escapeShopHtml(product.name)}</a>
-                <div class="text-xs text-[#2d2420]/55 mt-1">${escapeShopHtml(product.category || '')}</div>
-                ${unavailable ? '<div class="inline-flex mt-2 px-2.5 py-1 rounded-full bg-[#e05a5a]/10 text-[#e05a5a] text-[11px] font-bold">غير متوفر حاليًا</div>' : ''}
-                <div class="mt-3 flex flex-wrap items-center gap-2">
-                  ${unavailable ? '<button type="button" onclick="shopInquiry(' + JSON.stringify(product.name) + ')" class="px-3 py-2 rounded-xl bg-[#eaf3f2] text-[#135c59] text-xs font-bold hover:bg-[#dceeed]"><i class="fa-brands fa-whatsapp mr-1"></i> استفسار</button>' : `
-                  <div class="flex items-center border border-[#135c59]/15 rounded-xl overflow-hidden bg-[#fbf9f5]">
-                    <button type="button" onclick="changeShopQty('${safeId}', -1)" class="w-9 h-9 text-[#135c59] font-bold">−</button>
-                    <span id="${safeId}" class="w-8 text-center text-sm font-bold text-[#135c59]">1</span>
-                    <button type="button" onclick="changeShopQty('${safeId}', 1)" class="w-9 h-9 text-[#135c59] font-bold">+</button>
-                  </div>
-                  <button type="button" onclick="shopOrder(${JSON.stringify(product.name)}, '${safeId}')" class="px-3 py-2 rounded-xl bg-[#135c59] text-white text-xs font-bold hover:bg-[#0e4644]"><i class="fa-brands fa-whatsapp mr-1"></i> طلب</button>
-                  <button type="button" onclick="shopInquiry(${JSON.stringify(product.name)})" class="px-3 py-2 rounded-xl bg-[#eaf3f2] text-[#135c59] text-xs font-bold hover:bg-[#dceeed]"><i class="fa-brands fa-whatsapp mr-1"></i> استفسار</button>`}
-                </div>
-              </div>
-            </div>
-          </article>`;
-      }).join('');
-    }
-
-    function changeShopQty(id, delta) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const current = parseInt(el.textContent, 10) || 1;
-      el.textContent = Math.max(1, current + delta);
-    }
-
-    function shopOrder(productName, qtyId) {
-      const qty = Math.max(1, parseInt(document.getElementById(qtyId)?.textContent || '1', 10));
-      const message = `أريد طلب: ${productName}\nالكمية: ${qty}`;
-      window.open(`https://wa.me/201124333193?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
-    }
-
-    function shopInquiry(productName) {
-      const message = `استفسار عن: ${productName}`;
-      window.open(`https://wa.me/201124333193?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
-    }
-
-    function escapeShopHtml(value) {
-      return String(value ?? '').replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
-    }
-    function escapeAttr(value) { return escapeShopHtml(value); }
 
     // Services Modal Logic
     function openServicesModal() {
@@ -1152,5 +1002,190 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
   });
   </script>
   
+  <!-- SHOP MODAL -->
+  <div id="shop-modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="shop-title">
+    <div class="absolute inset-0 bg-[#2d2420]/50 backdrop-blur-sm" onclick="closeShopModal()"></div>
+    <div class="relative w-full max-w-5xl max-h-[92vh] overflow-hidden rounded-3xl bg-[#fbf9f5] shadow-2xl flex flex-col">
+      <div class="flex items-center justify-between gap-4 px-5 py-4 sm:px-7 border-b border-[#135c59]/10 bg-[#fbf9f5]">
+        <div>
+          <h2 id="shop-title" class="text-xl sm:text-2xl font-extrabold text-[#135c59]">Furry4Ever Shop</h2>
+          <p class="text-xs sm:text-sm text-[#2d2420]/60 mt-1">اختر المنتج والكمية ثم اضغط طلب أو استفسار</p>
+        </div>
+        <button onclick="closeShopModal()" aria-label="Close Shop" class="w-10 h-10 rounded-full bg-[#135c59]/10 text-[#135c59] flex items-center justify-center hover:bg-[#135c59]/20">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="px-5 sm:px-7 pt-4">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-[#135c59]/50"></i>
+          <input id="shop-search" type="search" placeholder="ابحث عن منتج..." oninput="filterShopProducts()" class="w-full rounded-2xl border border-[#135c59]/15 bg-white py-3 pr-11 pl-4 outline-none focus:border-[#135c59] text-sm">
+        </div>
+        <div id="shop-categories" class="mt-3 flex gap-2 overflow-x-auto pb-1"></div>
+      </div>
+
+      <div id="shop-products" class="flex-1 overflow-y-auto px-5 sm:px-7 py-5">
+        <div class="text-center py-12 text-[#2d2420]/60">جاري تحميل المنتجات...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SHOP_WHATSAPP = "201124333193";
+    let shopProducts = [];
+    let activeShopCategory = "All";
+
+    function openShopModal() {
+      const modal = document.getElementById("shop-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+      loadShopProducts();
+    }
+
+    function closeShopModal() {
+      const modal = document.getElementById("shop-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+
+    async function loadShopProducts() {
+      const container = document.getElementById("shop-products");
+      if (shopProducts.length) {
+        renderShopCategories();
+        renderShopProducts();
+        return;
+      }
+      try {
+        const registry = await fetch("/shop/products.json", {cache: "no-cache"}).then(r => {
+          if (!r.ok) throw new Error("Registry not found");
+          return r.json();
+        });
+
+        const loaded = await Promise.all(registry.products.map(async item => {
+          const data = await fetch(`/shop/products/${item.slug}/product.json`, {cache: "no-cache"}).then(r => {
+            if (!r.ok) throw new Error("Product data not found");
+            return r.json();
+          });
+          return {...data, slug: item.slug};
+        }));
+
+        shopProducts = loaded;
+        renderShopCategories();
+        renderShopProducts();
+      } catch (err) {
+        container.innerHTML = `<div class="text-center py-12 text-red-600">تعذر تحميل المنتجات حاليًا. حاول مرة أخرى.</div>`;
+      }
+    }
+
+    function renderShopCategories() {
+      const el = document.getElementById("shop-categories");
+      const categories = ["All", ...new Set(shopProducts.map(p => p.category).filter(Boolean))];
+      el.innerHTML = categories.map(category => `
+        <button onclick="setShopCategory(${JSON.stringify(category)})"
+          class="shop-category-btn shrink-0 rounded-full border px-4 py-2 text-xs font-bold transition-colors ${
+            activeShopCategory === category
+              ? "bg-[#135c59] text-white border-[#135c59]"
+              : "bg-white text-[#135c59] border-[#135c59]/15"
+          }">
+          ${category === "All" ? "الكل" : escapeShopHtml(category)}
+        </button>
+      `).join("");
+    }
+
+    function setShopCategory(category) {
+      activeShopCategory = category;
+      renderShopCategories();
+      renderShopProducts();
+    }
+
+    function filterShopProducts() {
+      renderShopProducts();
+    }
+
+    function renderShopProducts() {
+      const container = document.getElementById("shop-products");
+      const query = (document.getElementById("shop-search")?.value || "").trim().toLowerCase();
+
+      const filtered = shopProducts.filter(p => {
+        const matchesCategory = activeShopCategory === "All" || p.category === activeShopCategory;
+        const haystack = `${p.name || ""} ${p.category || ""} ${p.description || ""}`.toLowerCase();
+        return matchesCategory && haystack.includes(query);
+      });
+
+      if (!filtered.length) {
+        container.innerHTML = `<div class="text-center py-12 text-[#2d2420]/60">لا توجد منتجات مطابقة.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map((p, i) => {
+        const available = p.available !== false;
+        const id = `shop-qty-${i}`;
+        return `
+          <article class="bg-white rounded-2xl border border-[#135c59]/10 overflow-hidden mb-4 shadow-sm">
+            <div class="flex gap-3 p-3 sm:p-4 items-center">
+              <a href="/shop/products/${encodeURIComponent(p.slug)}/" target="_blank" class="shrink-0 w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-[#fbf9f5] flex items-center justify-center overflow-hidden">
+                <img src="/shop/products/${encodeURIComponent(p.slug)}/${encodeURIComponent(p.image || "image.jpg")}" alt="${escapeShopHtml(p.name)}" class="w-full h-full object-contain">
+              </a>
+              <div class="min-w-0 flex-1">
+                <a href="/shop/products/${encodeURIComponent(p.slug)}/" target="_blank" class="font-extrabold text-[#135c59] hover:underline text-sm sm:text-base">${escapeShopHtml(p.name)}</a>
+                ${p.category ? `<div class="text-[11px] text-[#2d2420]/50 mt-1">${escapeShopHtml(p.category)}</div>` : ""}
+                <div class="mt-3 flex flex-wrap items-center gap-2">
+                  ${available ? `
+                    <div class="flex items-center border border-[#135c59]/15 rounded-xl overflow-hidden bg-[#fbf9f5]">
+                      <button onclick="changeShopQty('${id}', -1)" class="w-9 h-9 text-[#135c59] font-bold">−</button>
+                      <span id="${id}" class="w-8 text-center font-bold text-[#135c59]">1</span>
+                      <button onclick="changeShopQty('${id}', 1)" class="w-9 h-9 text-[#135c59] font-bold">+</button>
+                    </div>
+                    <button onclick="orderShopProduct('${p.slug}', '${escapeJs(p.name)}', '${id}')"
+                      class="rounded-xl bg-[#135c59] text-white px-4 py-2 text-xs font-bold hover:opacity-90">
+                      <i class="fa-solid fa-cart-shopping ml-1"></i> طلب
+                    </button>
+                  ` : `
+                    <span class="rounded-xl bg-[#f1e7df] text-[#8a4b2a] px-3 py-2 text-xs font-bold">غير متوفر حاليًا</span>
+                  `}
+                  <button onclick="askShopProduct('${escapeJs(p.name)}')"
+                    class="rounded-xl bg-[#eaf3f2] text-[#135c59] px-4 py-2 text-xs font-bold hover:bg-[#dceceb]">
+                    <i class="fa-regular fa-comment-dots ml-1"></i> استفسار
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function changeShopQty(id, delta) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      let qty = parseInt(el.textContent, 10) || 1;
+      qty = Math.max(1, qty + delta);
+      el.textContent = qty;
+    }
+
+    function orderShopProduct(slug, name, qtyId) {
+      const qty = document.getElementById(qtyId)?.textContent || "1";
+      const message = `أريد طلب: ${name}\nالكمية: ${qty}`;
+      window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${encodeURIComponent(message)}`, "_blank");
+    }
+
+    function askShopProduct(name) {
+      const message = `استفسار عن: ${name}`;
+      window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${encodeURIComponent(message)}`, "_blank");
+    }
+
+    function escapeShopHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[c]));
+    }
+
+    function escapeJs(value) {
+      return String(value ?? "").replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/\r/g, "").replace(/\n/g, "\\n");
+    }
+  </script>
+
 </body>
 </html>
