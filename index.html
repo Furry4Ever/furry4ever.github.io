@@ -958,19 +958,28 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
   const container = document.getElementById("shop-products");
 
   try {
-    const registry = await fetch("/shop/products.json", {
-      cache: "no-cache"
-    }).then(r => {
-      if (!r.ok) throw new Error("Registry not found");
+    // اكتشاف مجلدات المنتجات تلقائيًا من GitHub
+    const folders = await fetch(
+      "https://api.github.com/repos/Furry4Ever/furry4ever.github.io/contents/shop/products?ref=main",
+      {
+        cache: "no-cache",
+        headers: {
+          "Accept": "application/vnd.github+json"
+        }
+      }
+    ).then(r => {
+      if (!r.ok) throw new Error("Products folder not found");
       return r.json();
     });
 
+    const productFolders = folders.filter(item => item.type === "dir");
+
     const loaded = [];
 
-    for (const item of registry.products || []) {
+    for (const folder of productFolders) {
       try {
         const data = await fetch(
-          `/shop/products/${encodeURIComponent(item.slug)}/product.json`,
+          `/shop/products/${encodeURIComponent(folder.name)}/product.json`,
           { cache: "no-cache" }
         ).then(r => {
           if (!r.ok) throw new Error("Product data not found");
@@ -979,11 +988,11 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
 
         loaded.push({
           ...data,
-          slug: item.slug
+          slug: folder.name
         });
 
       } catch (error) {
-        console.warn("Skipped product:", item.slug);
+        console.warn("Skipped product:", folder.name);
       }
     }
 
@@ -993,6 +1002,8 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
     renderShopProducts();
 
   } catch (err) {
+    console.error(err);
+
     container.innerHTML =
       `<div class="text-center py-12 text-red-600">
         تعذر تحميل المنتجات حاليًا. حاول مرة أخرى.
@@ -1027,57 +1038,130 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
     }
 
     function renderShopProducts() {
-      const container = document.getElementById("shop-products");
-      const query = (document.getElementById("shop-search")?.value || "").trim().toLowerCase();
+  const container = document.getElementById("shop-products");
+  const query = (document.getElementById("shop-search")?.value || "").trim().toLowerCase();
 
-      const filtered = shopProducts.filter(p => {
-        const matchesCategory = activeShopCategory === "All" || p.category === activeShopCategory;
-        const haystack = `${p.name || ""} ${p.category || ""} ${p.description || ""}`.toLowerCase();
-        return matchesCategory && haystack.includes(query);
-      });
+  const filtered = shopProducts.filter(p => {
+    const matchesCategory =
+      activeShopCategory === "All" ||
+      p.category === activeShopCategory;
 
-      if (!filtered.length) {
-        container.innerHTML = `<div class="text-center py-12 text-[#2d2420]/60">لا توجد منتجات مطابقة.</div>`;
-        return;
-      }
+    const haystack =
+      `${p.name || ""} ${p.category || ""} ${p.description || ""}`.toLowerCase();
 
-      container.innerHTML = filtered.map((p, i) => {
-        const available = p.available !== false;
-        const id = `shop-qty-${i}`;
-        return `
-          <article class="bg-white rounded-2xl border border-[#135c59]/10 overflow-hidden mb-4 shadow-sm">
-            <div class="flex gap-3 p-3 sm:p-4 items-center">
-              <a href="/shop/products/${encodeURIComponent(p.slug)}/" target="_blank" class="shrink-0 w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-[#fbf9f5] flex items-center justify-center overflow-hidden">
-                <img src="/shop/products/${encodeURIComponent(p.slug)}/${encodeURIComponent(p.image || "image.jpg")}" alt="${escapeShopHtml(p.name)}" class="w-full h-full object-contain">
-              </a>
-              <div class="min-w-0 flex-1">
-                <a href="/shop/products/${encodeURIComponent(p.slug)}/" target="_blank" class="font-extrabold text-[#135c59] hover:underline text-sm sm:text-base">${escapeShopHtml(p.name)}</a>
-                ${p.category ? `<div class="text-[11px] text-[#2d2420]/50 mt-1">${escapeShopHtml(p.category)}</div>` : ""}
-                <div class="mt-3 flex flex-wrap items-center gap-2">
-                  ${available ? `
+    return matchesCategory && haystack.includes(query);
+  });
+
+  if (!filtered.length) {
+    container.innerHTML =
+      `<div class="text-center py-12 text-[#2d2420]/60">
+        لا توجد منتجات مطابقة.
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map((p, i) => {
+    const available = p.available !== false;
+    const id = `shop-qty-${i}`;
+
+    const productUrl =
+      `/shop/product.html?slug=${encodeURIComponent(p.slug)}`;
+
+    const productImage =
+      `/shop/products/${encodeURIComponent(p.slug)}/${encodeURIComponent(p.image || "image.jpg")}`;
+
+    return `
+      <article class="bg-white rounded-2xl border border-[#135c59]/10 overflow-hidden mb-4 shadow-sm">
+
+        <div class="flex gap-3 p-3 sm:p-4 items-center">
+
+          <a href="${productUrl}"
+             target="_blank"
+             class="shrink-0 w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-[#fbf9f5] flex items-center justify-center overflow-hidden">
+
+            <img
+              src="${productImage}"
+              alt="${escapeShopHtml(p.name)}"
+              class="w-full h-full object-contain">
+          </a>
+
+          <div class="min-w-0 flex-1">
+
+            <a href="${productUrl}"
+               target="_blank"
+               class="font-extrabold text-[#135c59] hover:underline text-sm sm:text-base">
+
+              ${escapeShopHtml(p.name)}
+
+            </a>
+
+            ${
+              p.category
+                ? `<div class="text-[11px] text-[#2d2420]/50 mt-1">
+                    ${escapeShopHtml(p.category)}
+                   </div>`
+                : ""
+            }
+
+            <div class="mt-3 flex flex-wrap items-center gap-2">
+
+              ${
+                available
+                  ? `
                     <div class="flex items-center border border-[#135c59]/15 rounded-xl overflow-hidden bg-[#fbf9f5]">
-                      <button onclick="changeShopQty('${id}', -1)" class="w-9 h-9 text-[#135c59] font-bold">−</button>
-                      <span id="${id}" class="w-8 text-center font-bold text-[#135c59]">1</span>
-                      <button onclick="changeShopQty('${id}', 1)" class="w-9 h-9 text-[#135c59] font-bold">+</button>
+
+                      <button
+                        onclick="changeShopQty('${id}', -1)"
+                        class="w-9 h-9 text-[#135c59] font-bold">
+                        −
+                      </button>
+
+                      <span
+                        id="${id}"
+                        class="w-8 text-center font-bold text-[#135c59]">
+                        1
+                      </span>
+
+                      <button
+                        onclick="changeShopQty('${id}', 1)"
+                        class="w-9 h-9 text-[#135c59] font-bold">
+                        +
+                      </button>
+
                     </div>
-                    <button onclick="orderShopProduct('${p.slug}', '${escapeJs(p.name)}', '${id}')"
+
+                    <button
+                      onclick="orderShopProduct('${p.slug}', '${escapeJs(p.name)}', '${id}')"
                       class="rounded-xl bg-[#135c59] text-white px-4 py-2 text-xs font-bold hover:opacity-90">
-                      <i class="fa-solid fa-cart-shopping ml-1"></i> طلب
+
+                      <i class="fa-solid fa-cart-shopping ml-1"></i>
+                      طلب
+
                     </button>
-                  ` : `
-                    <span class="rounded-xl bg-[#f1e7df] text-[#8a4b2a] px-3 py-2 text-xs font-bold">غير متوفر حاليًا</span>
-                  `}
-                  <button onclick="askShopProduct('${escapeJs(p.name)}')"
-                    class="rounded-xl bg-[#eaf3f2] text-[#135c59] px-4 py-2 text-xs font-bold hover:bg-[#dceceb]">
-                    <i class="fa-regular fa-comment-dots ml-1"></i> استفسار
-                  </button>
-                </div>
-              </div>
+                  `
+                  : `
+                    <span class="rounded-xl bg-[#f1e7df] text-[#8a4b2a] px-3 py-2 text-xs font-bold">
+                      غير متوفر حاليًا
+                    </span>
+                  `
+              }
+
+              <button
+                onclick="askShopProduct('${escapeJs(p.name)}')"
+                class="rounded-xl bg-[#eaf3f2] text-[#135c59] px-4 py-2 text-xs font-bold hover:bg-[#dceceb]">
+
+                <i class="fa-regular fa-comment-dots ml-1"></i>
+                استفسار
+
+              </button>
+
             </div>
-          </article>
-        `;
-      }).join("");
-    }
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
 
     function changeShopQty(id, delta) {
       const el = document.getElementById(id);
