@@ -1005,7 +1005,7 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
       const el = document.getElementById("shop-categories");
       const categories = ["All", ...new Set(shopProducts.map(p => p.category).filter(Boolean))];
       el.innerHTML = categories.map(category => `
-        <button onclick="setShopCategory(${JSON.stringify(category)})"
+        <button onclick="alert('Category: ' + ${JSON.stringify(category)}); setShopCategory(${JSON.stringify(category)})"
           class="shop-category-btn shrink-0 rounded-full border px-4 py-2 text-xs font-bold transition-colors ${
             activeShopCategory === category
               ? "bg-[#135c59] text-white border-[#135c59]"
