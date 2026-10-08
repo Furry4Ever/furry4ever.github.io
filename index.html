@@ -1012,19 +1012,44 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
 }
 
    function renderShopCategories() {
-  const el = document.getElementById("shop-categories");
-  const categories = ["All", ...new Set(shopProducts.map(p => p.category).filter(Boolean))];
 
-  el.innerHTML = categories.map(category => `
-    <button onclick="setShopCategory(${JSON.stringify(category)})"
-      class="shop-category-btn shrink-0 rounded-full border px-4 py-2 text-xs font-bold transition-colors ${
+  const el = document.getElementById("shop-categories");
+
+  const categories = [
+    "All",
+    ...new Set(
+      shopProducts
+        .map(p => p.category)
+        .filter(Boolean)
+    )
+  ];
+
+  el.innerHTML = "";
+
+  categories.forEach(category => {
+
+    const button = document.createElement("button");
+
+    button.textContent =
+      category === "All"
+        ? "الكل"
+        : category;
+
+    button.className =
+      `shop-category-btn shrink-0 rounded-full border px-4 py-2 text-xs font-bold transition-colors ${
         activeShopCategory === category
           ? "bg-[#135c59] text-white border-[#135c59]"
           : "bg-white text-[#135c59] border-[#135c59]/15"
-      }">
-      ${category === "All" ? "الكل" : escapeShopHtml(category)}
-    </button>
-  `).join("");
+      }`;
+
+    button.addEventListener("click", () => {
+      setShopCategory(category);
+    });
+
+    el.appendChild(button);
+
+  });
+
 }
 
     function setShopCategory(category) {
