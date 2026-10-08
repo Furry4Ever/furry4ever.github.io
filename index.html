@@ -1031,7 +1031,10 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
       const query = (document.getElementById("shop-search")?.value || "").trim().toLowerCase();
 
       const filtered = shopProducts.filter(p => {
-        const matchesCategory = activeShopCategory === "All" || p.category === activeShopCategory;
+        const matchesCategory =
+  activeShopCategory === "All" ||
+  String(p.category || "").trim().toLowerCase() ===
+  String(activeShopCategory || "").trim().toLowerCase();
         const haystack = `${p.name || ""} ${p.category || ""} ${p.description || ""}`.toLowerCase();
         return matchesCategory && haystack.includes(query);
       });
