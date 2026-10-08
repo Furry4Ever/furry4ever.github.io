@@ -956,33 +956,50 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
     }
 
     async function loadShopProducts() {
-      const container = document.getElementById("shop-products");
-      if (shopProducts.length) {
-        renderShopCategories();
-        renderShopProducts();
-        return;
-      }
+  const container = document.getElementById("shop-products");
+
+  try {
+    const registry = await fetch("/shop/products.json", {
+      cache: "no-cache"
+    }).then(r => {
+      if (!r.ok) throw new Error("Registry not found");
+      return r.json();
+    });
+
+    const loaded = [];
+
+    for (const item of registry.products || []) {
       try {
-        const registry = await fetch("/shop/products.json", {cache: "no-cache"}).then(r => {
-          if (!r.ok) throw new Error("Registry not found");
+        const data = await fetch(
+          `/shop/products/${encodeURIComponent(item.slug)}/product.json`,
+          { cache: "no-cache" }
+        ).then(r => {
+          if (!r.ok) throw new Error("Product data not found");
           return r.json();
         });
 
-        const loaded = await Promise.all(registry.products.map(async item => {
-          const data = await fetch(`/shop/products/${item.slug}/product.json`, {cache: "no-cache"}).then(r => {
-            if (!r.ok) throw new Error("Product data not found");
-            return r.json();
-          });
-          return {...data, slug: item.slug};
-        }));
+        loaded.push({
+          ...data,
+          slug: item.slug
+        });
 
-        shopProducts = loaded;
-        renderShopCategories();
-        renderShopProducts();
-      } catch (err) {
-        container.innerHTML = `<div class="text-center py-12 text-red-600">تعذر تحميل المنتجات حاليًا. حاول مرة أخرى.</div>`;
+      } catch (error) {
+        console.warn("Skipped product:", item.slug);
       }
     }
+
+    shopProducts = loaded;
+
+    renderShopCategories();
+    renderShopProducts();
+
+  } catch (err) {
+    container.innerHTML =
+      `<div class="text-center py-12 text-red-600">
+        تعذر تحميل المنتجات حاليًا. حاول مرة أخرى.
+      </div>`;
+  }
+}
 
     function renderShopCategories() {
       const el = document.getElementById("shop-categories");
