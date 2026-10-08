@@ -149,7 +149,7 @@
       data-i18n="translation.key"
     */
 
-    document.querySelectorAll("[data-i18n]")
+    document.querySelectorAll("[data-i18n], [data-f4-key]")
       .forEach(element => {
 
         const key =
@@ -221,7 +221,6 @@
 
 
     switcher.innerHTML = `
-
       <button
         type="button"
         id="furry4ever-language-button"
@@ -242,30 +241,10 @@
           box-shadow:0 2px 8px rgba(0,0,0,.05);
         "
       >
-
         <span style="font-size:14px;">🌐</span>
-
-        <span id="furry4ever-language-label">
-          English
-        </span>
-
+        <span id="furry4ever-language-label">العربية</span>
       </button>
-
     `;
-
-
-    /*
-      Fixed position so we don't need
-      to modify the existing header.
-    */
-
-    switcher.style.position = "fixed";
-    switcher.style.top = "12px";
-    switcher.style.right = "12px";
-    switcher.style.zIndex = "9999";
-
-
-    document.body.appendChild(switcher);
 
 
     document
