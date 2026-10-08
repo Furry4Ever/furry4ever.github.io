@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Furry4Ever | المنتج</title>
+
+  <meta name="description"
+        content="تفاصيل المنتج من Furry4Ever">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body class="bg-[#fbf9f5] text-[#2d2420] min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-[#135c59]/10">
+    <div class="max-w-5xl mx-auto px-4 py-4">
+
+      <a href="/"
+         class="inline-flex items-center gap-2 text-[#135c59] font-extrabold">
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+        Furry4Ever
+
+      </a>
+
+    </div>
+  </header>
+
+
+  <!-- Product -->
+  <main class="max-w-5xl mx-auto px-4 py-8 sm:py-12">
+
+    <div id="product-container">
+
+      <div class="text-center py-16 text-[#2d2420]/60">
+        جاري تحميل المنتج...
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <script>
+
+    const SHOP_WHATSAPP = "201124333193";
+
+
+    function escapeHtml(value) {
+
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    function getProductSlug() {
+
+      const params = new URLSearchParams(window.location.search);
+
+      return params.get("slug");
+
+    }
+
+
+    async function loadProduct() {
+
+      const container =
+        document.getElementById("product-container");
+
+      const slug = getProductSlug();
+
+
+      if (!slug) {
+
+        container.innerHTML = `
+          <div class="text-center py-16">
+
+            <div class="text-red-600 text-lg font-bold mb-3">
+              المنتج غير موجود
+            </div>
+
+            <a href="/"
+               class="inline-block bg-[#135c59] text-white px-5 py-3 rounded-xl text-sm font-bold">
+
+              العودة للموقع
+
+            </a>
+
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      try {
+
+        const response = await fetch(
+          `/shop/products/${encodeURIComponent(slug)}/product.json`,
+          {
+            cache: "no-cache"
+          }
+        );
+
+
+        if (!response.ok) {
+
+          throw new Error("Product not found");
+
+        }
+
+
+        const product = await response.json();
+
+
+        const name =
+          product.name || "منتج";
+
+
+        const image =
+          `/shop/products/${encodeURIComponent(slug)}/${encodeURIComponent(product.image || "image.jpg")}`;
+
+
+        const available =
+          product.available !== false;
+
+
+        document.title =
+          `Furry4Ever | ${name}`;
+
+
+        container.innerHTML = `
+
+          <div class="bg-white rounded-3xl border border-[#135c59]/10 shadow-sm overflow-hidden">
+
+            <div class="grid md:grid-cols-2 gap-0">
+
+
+              <!-- Image -->
+
+              <div class="bg-[#fbf9f5] min-h-[320px] md:min-h-[500px] flex items-center justify-center p-6 sm:p-10">
+
+                <img
+                  src="${image}"
+                  alt="${escapeHtml(name)}"
+                  class="max-w-full max-h-[450px] object-contain">
+
+              </div>
+
+
+              <!-- Details -->
+
+              <div class="p-6 sm:p-10 flex flex-col justify-center">
+
+
+                ${
+                  product.category
+                    ? `
+                      <div class="text-xs font-bold text-[#135c59]/60 mb-3">
+                        ${escapeHtml(product.category)}
+                      </div>
+                    `
+                    : ""
+                }
+
+
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-[#135c59] leading-relaxed">
+
+                  ${escapeHtml(name)}
+
+                </h1>
+
+
+                ${
+                  product.description
+                    ? `
+                      <p class="mt-5 text-sm sm:text-base leading-8 text-[#2d2420]/75">
+
+                        ${escapeHtml(product.description)}
+
+                      </p>
+                    `
+                    : ""
+                }
+
+
+                <div class="mt-7">
+
+
+                  ${
+                    available
+                      ? `
+
+                        <button
+                          onclick="orderProduct()"
+                          class="w-full sm:w-auto rounded-2xl bg-[#135c59] text-white px-7 py-4 text-sm font-bold hover:opacity-90 transition">
+
+                          <i class="fa-brands fa-whatsapp ml-2"></i>
+
+                          طلب المنتج عبر واتساب
+
+                        </button>
+
+                      `
+                      : `
+
+                        <div class="inline-block rounded-2xl bg-[#f1e7df] text-[#8a4b2a] px-5 py-3 text-sm font-bold">
+
+                          غير متوفر حاليًا
+
+                        </div>
+
+                      `
+                  }
+
+
+                </div>
+
+
+                <a
+                  href="/"
+                  class="mt-5 text-center sm:text-right text-sm font-bold text-[#135c59] hover:underline">
+
+                  ← العودة إلى المتجر
+
+                </a>
+
+
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        window.currentProduct = product;
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        container.innerHTML = `
+
+          <div class="text-center py-16">
+
+            <div class="text-red-600 text-lg font-bold mb-3">
+
+              تعذر تحميل المنتج
+
+            </div>
+
+            <p class="text-sm text-[#2d2420]/60 mb-5">
+
+              تأكد من أن ملف product.json موجود داخل مجلد المنتج.
+
+            </p>
+
+            <a
+              href="/"
+              class="inline-block bg-[#135c59] text-white px-5 py-3 rounded-xl text-sm font-bold">
+
+              العودة للموقع
+
+            </a>
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    function orderProduct() {
+
+      const product = window.currentProduct;
+
+
+      if (!product) return;
+
+
+      const productName =
+        product.name || "منتج";
+
+
+      const message =
+        `مرحبًا، أريد طلب: ${productName}`;
+
+
+      const url =
+        `https://wa.me/${SHOP_WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+
+      window.open(url, "_blank");
+
+    }
+
+
+    loadProduct();
+
+  </script>
+
+</body>
+
+</html>
