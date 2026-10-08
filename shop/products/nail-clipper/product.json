@@ -1,7 +1,6 @@
 {
   "name": {
-    "ar": "قصافة أظافر للحيوانات الأليفة",
-    "en": "Pet Nail Clipper"
+    "Pet Nail Clipper"
   },
   "category": {
     "ar": "Grooming",
@@ -9,8 +8,7 @@
   },
   "image": "image.jpg",
   "description": {
-    "ar": "قصافة أظافر للحيوانات الأليفة مع مبرد أظافر.",
-    "en": "Pet nail clipper with nail file."
+    "Pet nail clipper with nail file."
   },
   "available": true
 }
