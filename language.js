@@ -101,7 +101,7 @@ const translations = {
     lang_btn: "English",
 
     // Hero Section
-    hero_badge: "فورري فور إيفر للرعاية البيطرية",
+    hero_badge: "للرعاية البيطرية Furry4Ever",
     hero_title: "هذه الأرواح هي مهمتنا",
     hero_subtitle: "رعاية بيطرية متخصصة لأليفك العزيز في المنزل",
     btn_book: "احجز زيارة منزلية",
