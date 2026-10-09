@@ -795,7 +795,7 @@
     });
   </script>
   
-  <!-- SHOP MODAL WITH QUICK CART BAR -->
+  <!-- SHOP MODAL -->
   <div id="shop-modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="shop-title">
     <div class="absolute inset-0 bg-[#2d2420]/50 backdrop-blur-sm" onclick="closeShopModal()"></div>
     <div class="relative w-full max-w-5xl max-h-[92vh] overflow-hidden rounded-3xl bg-[#fbf9f5] shadow-2xl flex flex-col">
@@ -804,7 +804,7 @@
       <div class="flex items-center justify-between gap-4 px-5 py-4 sm:px-7 border-b border-[#135c59]/10 bg-[#fbf9f5]">
         <div>
           <h2 id="shop-title" class="text-xl sm:text-2xl font-extrabold text-[#135c59]">Furry4Ever Shop</h2>
-          <p data-i18n="shop_sub" class="text-xs sm:text-sm text-[#2d2420]/60 mt-1">Select products and quantities, then send your order via WhatsApp</p>
+          <p data-i18n="shop_sub" class="text-xs sm:text-sm text-[#2d2420]/60 mt-1">Select products and quantities, review your cart, and submit your order</p>
         </div>
         <button onclick="closeShopModal()" aria-label="Close Shop" class="w-10 h-10 rounded-full bg-[#135c59]/10 text-[#135c59] flex items-center justify-center hover:bg-[#135c59]/20">
           <i class="fa-solid fa-xmark text-lg"></i>
@@ -825,7 +825,7 @@
         <div data-i18n="loading_products" class="text-center py-12 text-[#2d2420]/60">Loading products...</div>
       </div>
 
-      <!-- Quick Cart Bottom Bar (شريط جمع الطلبات) -->
+      <!-- Quick Cart Bottom Bar -->
       <div id="shop-cart-bar" class="hidden absolute bottom-0 inset-x-0 bg-white border-t border-[#135c59]/15 p-4 sm:px-7 shadow-2xl z-20 flex items-center justify-between gap-4">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-2xl bg-[#135c59]/10 text-[#135c59] flex items-center justify-center font-bold relative">
@@ -838,10 +838,79 @@
           </div>
         </div>
 
-        <button onclick="sendBulkCartOrder()" class="btn-primary py-3 px-5 sm:px-7 text-xs sm:text-sm bg-[#25D366] hover:bg-[#1eb957] text-white border-none shadow-md">
-          <i class="fa-brands fa-whatsapp text-base"></i>
-          <span data-i18n="btn_send_whatsapp_order">Send Order via WhatsApp</span>
+        <button onclick="openCartReviewModal()" class="btn-primary py-3 px-5 sm:px-7 text-xs sm:text-sm shadow-md">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span data-i18n="btn_review_order">View Order</span>
         </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CART REVIEW & DIRECT SUBMIT MODAL (نافذة التعديل وإرسال الطلب المباشر) -->
+  <div id="cart-review-modal" class="fixed inset-0 z-[80] hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div onclick="closeCartReviewModal()" class="fixed inset-0 modal-backdrop"></div>
+    
+    <div class="relative z-10 w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-[#135c59]/15 overflow-hidden my-8">
+      
+      <!-- Modal Header -->
+      <div class="bg-[#135c59] text-white p-6 sm:p-8 relative">
+        <button onclick="closeCartReviewModal()" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+        <div class="flex items-center gap-2 text-[#d9822b] text-xs font-bold uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span data-i18n="nav_shop">Shop</span>
+        </div>
+        <h2 data-i18n="cart_modal_title" class="text-2xl sm:text-3xl font-display font-bold">Your Order Summary</h2>
+      </div>
+
+      <!-- Form & Items Review -->
+      <div id="cart-form-container" class="p-6 sm:p-8">
+        
+        <!-- Cart Items List -->
+        <div id="cart-review-items" class="space-y-3 mb-6 max-h-56 overflow-y-auto pr-1">
+          <!-- Item rows inserted dynamically -->
+        </div>
+
+        <form id="cart-submit-form" class="space-y-4 pt-4 border-t border-[#135c59]/10">
+          <input type="hidden" name="access_key" value="96a85d2d-8127-47d2-ab14-c60c00da5801">
+          <input type="hidden" name="order_details" id="cart-order-details-input">
+
+          <h3 data-i18n="cart_customer_info" class="text-xs font-bold uppercase tracking-wider text-[#135c59]">Customer Information</h3>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label data-i18n="form_owner_name" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Owner Name *</label>
+              <input type="text" name="customer_name" required data-i18n-placeholder="placeholder_owner" placeholder="Your Name" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
+            </div>
+            <div>
+              <label data-i18n="form_phone" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Phone Number *</label>
+              <input type="tel" name="phone" required data-i18n-placeholder="placeholder_phone" placeholder="01124333193" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary w-full py-3.5 mt-2">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span data-i18n="btn_submit_order">Submit Order</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Order Success Screen -->
+      <div id="cart-success-container" class="hidden p-8 text-center space-y-4">
+        <div class="w-16 h-16 bg-[#135c59]/10 text-[#135c59] rounded-full flex items-center justify-center mx-auto">
+          <i class="fa-solid fa-circle-check text-4xl"></i>
+        </div>
+        <h3 data-i18n="shop_success_title" class="text-2xl font-display font-bold text-[#135c59]">Order Submitted Successfully!</h3>
+        <p data-i18n="shop_success_desc" class="text-sm text-[#2d2420]/80 leading-relaxed max-w-md mx-auto">
+          Thank you for your order! Our team will contact you shortly to confirm the items and delivery details.
+        </p>
+        <div class="pt-4">
+          <button onclick="closeCartReviewModal(); closeShopModal();" class="btn-primary text-sm py-2.5 px-6">
+            <span data-i18n="btn_close">Close Window</span>
+          </button>
+        </div>
       </div>
 
     </div>
@@ -851,7 +920,7 @@
     const SHOP_WHATSAPP = "201124333193";
     let shopProducts = [];
     let activeShopCategory = "All";
-    let cart = {}; // تخزين السلة: { slug: { name: '...', qty: 1 } }
+    let cart = {}; // السلة: { slug: { name: '...', qty: 1 } }
 
     function getProductField(field, lang) {
       if (!field) return "";
@@ -1090,23 +1159,118 @@
       }
     }
 
-    function sendBulkCartOrder() {
-      const lang = typeof currentLang !== 'undefined' ? currentLang : 'ar';
-      let message = lang === 'en' 
-        ? "Hello Furry4Ever, I would like to order the following items:\n\n"
-        : "مرحبًا Furry4Ever، أريد طلب المنتجات التالية:\n\n";
+    // فتح نافذة معاينة وتعديل الطلب
+    function openCartReviewModal() {
+      renderCartReviewItems();
+      const modal = document.getElementById("cart-review-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
 
-      let index = 1;
-      for (let slug in cart) {
-        const item = cart[slug];
-        message += `${index}. ${item.name} (${lang === 'en' ? 'Qty' : 'الكمية'}: ${item.qty})\n`;
-        index++;
+    function closeCartReviewModal() {
+      const modal = document.getElementById("cart-review-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+
+      setTimeout(() => {
+        document.getElementById('cart-form-container').classList.remove('hidden');
+        document.getElementById('cart-success-container').classList.add('hidden');
+      }, 300);
+    }
+
+    function renderCartReviewItems() {
+      const container = document.getElementById("cart-review-items");
+      const lang = typeof currentLang !== 'undefined' ? currentLang : 'ar';
+
+      if (Object.keys(cart).length === 0) {
+        container.innerHTML = `<div class="text-center py-6 text-[#2d2420]/60">${translations[lang].cart_empty}</div>`;
+        return;
       }
 
-      message += lang === 'en' ? "\nThank you!" : "\nشكراً لكم!";
+      container.innerHTML = Object.keys(cart).map(slug => {
+        const item = cart[slug];
+        return `
+          <div class="flex items-center justify-between gap-3 p-3 bg-[#fbf9f5] rounded-xl border border-[#135c59]/10">
+            <span class="font-bold text-sm text-[#135c59] flex-1">${escapeShopHtml(item.name)}</span>
+            
+            <div class="flex items-center border border-[#135c59]/15 rounded-lg overflow-hidden bg-white">
+              <button onclick="updateCartItemQty('${slug}', -1)" class="w-7 h-7 text-[#135c59] font-bold">−</button>
+              <span class="w-7 text-center font-bold text-xs text-[#135c59]">${item.qty}</span>
+              <button onclick="updateCartItemQty('${slug}', 1)" class="w-7 h-7 text-[#135c59] font-bold">+</button>
+            </div>
 
-      window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${encodeURIComponent(message)}`, "_blank");
+            <button onclick="removeFromCart('${slug}')" class="text-red-500 hover:text-red-700 p-1" title="Remove">
+              <i class="fa-solid fa-trash-can text-sm"></i>
+            </button>
+          </div>
+        `;
+      }).join("");
     }
+
+    function updateCartItemQty(slug, delta) {
+      if (cart[slug]) {
+        cart[slug].qty += delta;
+        if (cart[slug].qty <= 0) {
+          delete cart[slug];
+        }
+      }
+      renderCartReviewItems();
+      updateCartUI();
+      renderShopProducts();
+    }
+
+    function removeFromCart(slug) {
+      delete cart[slug];
+      renderCartReviewItems();
+      updateCartUI();
+      renderShopProducts();
+    }
+
+    // إرسال الطلب المباشر عبر Web3Forms بدون فتح الواتساب
+    document.getElementById('cart-submit-form')?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      if (Object.keys(cart).length === 0) {
+        alert("السلة فارغة!");
+        return;
+      }
+
+      const btn = this.querySelector('button[type="submit"]');
+      const originalText = btn ? btn.innerHTML : '';
+      if (btn) btn.innerHTML = "<span>Sending...</span>";
+
+      // تحضير نص تفاصيل المنتجات لإرساله للبريد الإليكتروني
+      let orderDetailsText = "";
+      let idx = 1;
+      for (let slug in cart) {
+        orderDetailsText += `${idx}. ${cart[slug].name} - Qty: ${cart[slug].qty}\n`;
+        idx++;
+      }
+      document.getElementById('cart-order-details-input').value = orderDetailsText;
+
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: new FormData(this)
+        });
+        const result = await response.json();
+
+        if (result.success) {
+          document.getElementById('cart-form-container').classList.add('hidden');
+          document.getElementById('cart-success-container').classList.remove('hidden');
+          cart = {}; // تفريغ السلة بعد النجاح
+          updateCartUI();
+          renderShopProducts();
+          this.reset();
+        } else {
+          alert("حدث خطأ أثناء الإرسال، حاول مرة أخرى.");
+        }
+      } catch (err) {
+        alert("خطأ في الاتصال بالسيرفر.");
+      } finally {
+        if (btn) btn.innerHTML = originalText;
+      }
+    });
 
     function askShopProduct(name) {
       const lang = typeof currentLang !== 'undefined' ? currentLang : 'ar';
