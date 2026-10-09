@@ -1,326 +1,231 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="html-root">
 
 <head>
   <meta charset="UTF-8">
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>Furry4Ever | المنتج</title>
-
-  <meta name="description"
-        content="تفاصيل المنتج من Furry4Ever">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Furry4Ever | Product</title>
+  <meta name="description" content="Furry4Ever Product Details">
 
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body class="bg-[#fbf9f5] text-[#2d2420] min-h-screen">
 
   <!-- Header -->
   <header class="bg-white border-b border-[#135c59]/10">
-    <div class="max-w-5xl mx-auto px-4 py-4">
-
-      <a href="/"
-         class="inline-flex items-center gap-2 text-[#135c59] font-extrabold">
-
-        <i class="fa-solid fa-arrow-right"></i>
-
-        Furry4Ever
-
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="inline-flex items-center gap-2 text-[#135c59] font-extrabold">
+        <i id="back-arrow-icon" class="fa-solid fa-arrow-right"></i>
+        <span>Furry4Ever</span>
       </a>
 
+      <!-- Quick Language Switcher Button -->
+      <button onclick="switchLanguage()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#135c59]/20 text-[#135c59] hover:bg-[#135c59]/10 text-xs font-bold transition">
+        <i class="fa-solid fa-globe"></i>
+        <span id="lang-btn-text">English</span>
+      </button>
     </div>
   </header>
 
-
-  <!-- Product -->
+  <!-- Product Container -->
   <main class="max-w-5xl mx-auto px-4 py-8 sm:py-12">
-
     <div id="product-container">
-
-      <div class="text-center py-16 text-[#2d2420]/60">
+      <div id="loading-text" class="text-center py-16 text-[#2d2420]/60">
         جاري تحميل المنتج...
       </div>
-
     </div>
-
   </main>
 
-
   <script>
-
     const SHOP_WHATSAPP = "201124333193";
 
+    // معرفة لغة المحادثة المحفوظة في الموقع
+    let currentLang = localStorage.getItem('site_lang') || 'ar';
+
+    function applyLanguageSettings() {
+      const htmlRoot = document.getElementById('html-root');
+      const langBtnText = document.getElementById('lang-btn-text');
+      const arrowIcon = document.getElementById('back-arrow-icon');
+
+      htmlRoot.setAttribute('lang', currentLang);
+      htmlRoot.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+
+      if (langBtnText) {
+        langBtnText.textContent = currentLang === 'ar' ? 'English' : 'عربي';
+      }
+
+      if (arrowIcon) {
+        arrowIcon.className = currentLang === 'ar' ? 'fa-solid fa-arrow-right' : 'fa-solid fa-arrow-left';
+      }
+    }
+
+    function switchLanguage() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      localStorage.setItem('site_lang', currentLang);
+      applyLanguageSettings();
+      loadProduct();
+    }
 
     function escapeHtml(value) {
-
       return String(value || "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
     }
-
 
     function getProductSlug() {
-
       const params = new URLSearchParams(window.location.search);
-
       return params.get("slug");
-
     }
 
+    // دالة لاستخراج النص بناءً على اللغة المحددة
+    function getLocalizedText(field, defaultText = "") {
+      if (!field) return defaultText;
+      if (typeof field === 'object') {
+        return field[currentLang] || field['ar'] || field['en'] || defaultText;
+      }
+      return field;
+    }
 
     async function loadProduct() {
+      applyLanguageSettings();
 
-      const container =
-        document.getElementById("product-container");
-
+      const container = document.getElementById("product-container");
       const slug = getProductSlug();
 
+      const uiTexts = {
+        ar: {
+          not_found: "المنتج غير موجود",
+          back_home: "العودة للموقع",
+          out_of_stock: "غير متوفر حاليًا",
+          order_whatsapp: "طلب المنتج عبر واتساب",
+          back_shop: "← العودة إلى المتجر",
+          error_load: "تعذر تحميل المنتج",
+          check_file: "تأكد من أن ملف product.json موجود داخل مجلد المنتج."
+        },
+        en: {
+          not_found: "Product Not Found",
+          back_home: "Return to Home",
+          out_of_stock: "Out of Stock",
+          order_whatsapp: "Order via WhatsApp",
+          back_shop: "← Back to Shop",
+          error_load: "Failed to load product",
+          check_file: "Make sure product.json file exists in product directory."
+        }
+      };
+
+      const txt = uiTexts[currentLang];
 
       if (!slug) {
-
         container.innerHTML = `
           <div class="text-center py-16">
-
-            <div class="text-red-600 text-lg font-bold mb-3">
-              المنتج غير موجود
-            </div>
-
-            <a href="/"
-               class="inline-block bg-[#135c59] text-white px-5 py-3 rounded-xl text-sm font-bold">
-
-              العودة للموقع
-
+            <div class="text-red-600 text-lg font-bold mb-3">${txt.not_found}</div>
+            <a href="/" class="inline-block bg-[#135c59] text-white px-5 py-3 rounded-xl text-sm font-bold">
+              ${txt.back_home}
             </a>
-
           </div>
         `;
-
         return;
-
       }
 
-
       try {
-
         const response = await fetch(
           `/shop/products/${encodeURIComponent(slug)}/product.json`,
-          {
-            cache: "no-cache"
-          }
+          { cache: "no-cache" }
         );
 
-
         if (!response.ok) {
-
           throw new Error("Product not found");
-
         }
-
 
         const product = await response.json();
 
+        const name = getLocalizedText(product.name, currentLang === 'ar' ? 'منتج' : 'Product');
+        const category = getLocalizedText(product.category, "");
+        const description = getLocalizedText(product.description, "");
+        const image = `/shop/products/${encodeURIComponent(slug)}/${encodeURIComponent(product.image || "image.jpg")}`;
+        const available = product.available !== false;
 
-        const name =
-          product.name || "منتج";
-
-
-        const image =
-          `/shop/products/${encodeURIComponent(slug)}/${encodeURIComponent(product.image || "image.jpg")}`;
-
-
-        const available =
-          product.available !== false;
-
-
-        document.title =
-          `Furry4Ever | ${name}`;
-
+        document.title = `Furry4Ever | ${name}`;
 
         container.innerHTML = `
-
           <div class="bg-white rounded-3xl border border-[#135c59]/10 shadow-sm overflow-hidden">
-
             <div class="grid md:grid-cols-2 gap-0">
 
-
               <!-- Image -->
-
               <div class="bg-[#fbf9f5] min-h-[320px] md:min-h-[500px] flex items-center justify-center p-6 sm:p-10">
-
-                <img
-                  src="${image}"
-                  alt="${escapeHtml(name)}"
-                  class="max-w-full max-h-[450px] object-contain">
-
+                <img src="${image}" alt="${escapeHtml(name)}" class="max-w-full max-h-[450px] object-contain">
               </div>
-
 
               <!-- Details -->
-
               <div class="p-6 sm:p-10 flex flex-col justify-center">
 
-
-                ${
-                  product.category
-                    ? `
-                      <div class="text-xs font-bold text-[#135c59]/60 mb-3">
-                        ${escapeHtml(product.category)}
-                      </div>
-                    `
-                    : ""
-                }
-
+                ${category ? `<div class="text-xs font-bold text-[#135c59]/60 mb-3">${escapeHtml(category)}</div>` : ""}
 
                 <h1 class="text-2xl sm:text-3xl font-extrabold text-[#135c59] leading-relaxed">
-
                   ${escapeHtml(name)}
-
                 </h1>
 
-
-                ${
-                  product.description
-                    ? `
-                      <p class="mt-5 text-sm sm:text-base leading-8 text-[#2d2420]/75">
-
-                        ${escapeHtml(product.description)}
-
-                      </p>
-                    `
-                    : ""
-                }
-
+                ${description ? `<p class="mt-5 text-sm sm:text-base leading-8 text-[#2d2420]/75">${escapeHtml(description)}</p>` : ""}
 
                 <div class="mt-7">
-
-
-                  ${
-                    available
-                      ? `
-
-                        <button
-                          onclick="orderProduct()"
-                          class="w-full sm:w-auto rounded-2xl bg-[#135c59] text-white px-7 py-4 text-sm font-bold hover:opacity-90 transition">
-
-                          <i class="fa-brands fa-whatsapp ml-2"></i>
-
-                          طلب المنتج عبر واتساب
-
-                        </button>
-
-                      `
-                      : `
-
-                        <div class="inline-block rounded-2xl bg-[#f1e7df] text-[#8a4b2a] px-5 py-3 text-sm font-bold">
-
-                          غير متوفر حاليًا
-
-                        </div>
-
-                      `
-                  }
-
-
+                  ${available ? `
+                    <button onclick="orderProduct()" class="w-full sm:w-auto rounded-2xl bg-[#135c59] text-white px-7 py-4 text-sm font-bold hover:opacity-90 transition flex items-center justify-center gap-2">
+                      <i class="fa-brands fa-whatsapp text-lg"></i>
+                      <span>${txt.order_whatsapp}</span>
+                    </button>
+                  ` : `
+                    <div class="inline-block rounded-2xl bg-[#f1e7df] text-[#8a4b2a] px-5 py-3 text-sm font-bold">
+                      ${txt.out_of_stock}
+                    </div>
+                  `}
                 </div>
 
-
-                <a
-                  href="/"
-                  class="mt-5 text-center sm:text-right text-sm font-bold text-[#135c59] hover:underline">
-
-                  ← العودة إلى المتجر
-
+                <a href="/" class="mt-6 text-sm font-bold text-[#135c59] hover:underline inline-block">
+                  ${txt.back_shop}
                 </a>
 
-
               </div>
-
             </div>
-
           </div>
-
         `;
-
 
         window.currentProduct = product;
 
-
       } catch (error) {
-
         console.error(error);
 
-
         container.innerHTML = `
-
           <div class="text-center py-16">
-
-            <div class="text-red-600 text-lg font-bold mb-3">
-
-              تعذر تحميل المنتج
-
-            </div>
-
-            <p class="text-sm text-[#2d2420]/60 mb-5">
-
-              تأكد من أن ملف product.json موجود داخل مجلد المنتج.
-
-            </p>
-
-            <a
-              href="/"
-              class="inline-block bg-[#135c59] text-white px-5 py-3 rounded-xl text-sm font-bold">
-
-              العودة للموقع
-
+            <div class="text-red-600 text-lg font-bold mb-3">${txt.error_load}</div>
+            <p class="text-sm text-[#2d2420]/60 mb-5">${txt.check_file}</p>
+            <a href="/" class="inline-block bg-[#135c59] text-white px-5 py-3 rounded-xl text-sm font-bold">
+              ${txt.back_home}
             </a>
-
           </div>
-
         `;
-
       }
-
     }
-
 
     function orderProduct() {
-
       const product = window.currentProduct;
-
-
       if (!product) return;
 
+      const productName = getLocalizedText(product.name, "Product");
+      const message = currentLang === 'ar' 
+        ? `مرحبًا، أريد طلب: ${productName}`
+        : `Hello, I would like to order: ${productName}`;
 
-      const productName =
-        product.name || "منتج";
-
-
-      const message =
-        `مرحبًا، أريد طلب: ${productName}`;
-
-
-      const url =
-        `https://wa.me/${SHOP_WHATSAPP}?text=${encodeURIComponent(message)}`;
-
-
+      const url = `https://wa.me/${SHOP_WHATSAPP}?text=${encodeURIComponent(message)}`;
       window.open(url, "_blank");
-
     }
 
-
     loadProduct();
-
   </script>
 
 </body>
-
 </html>
