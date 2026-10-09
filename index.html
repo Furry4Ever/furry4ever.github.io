@@ -795,20 +795,23 @@
     });
   </script>
   
-  <!-- SHOP MODAL -->
+  <!-- SHOP MODAL WITH QUICK CART BAR -->
   <div id="shop-modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="shop-title">
     <div class="absolute inset-0 bg-[#2d2420]/50 backdrop-blur-sm" onclick="closeShopModal()"></div>
     <div class="relative w-full max-w-5xl max-h-[92vh] overflow-hidden rounded-3xl bg-[#fbf9f5] shadow-2xl flex flex-col">
+      
+      <!-- Modal Header -->
       <div class="flex items-center justify-between gap-4 px-5 py-4 sm:px-7 border-b border-[#135c59]/10 bg-[#fbf9f5]">
         <div>
           <h2 id="shop-title" class="text-xl sm:text-2xl font-extrabold text-[#135c59]">Furry4Ever Shop</h2>
-          <p data-i18n="shop_sub" class="text-xs sm:text-sm text-[#2d2420]/60 mt-1">Select a product and quantity then click Order or Inquire</p>
+          <p data-i18n="shop_sub" class="text-xs sm:text-sm text-[#2d2420]/60 mt-1">Select products and quantities, then send your order via WhatsApp</p>
         </div>
         <button onclick="closeShopModal()" aria-label="Close Shop" class="w-10 h-10 rounded-full bg-[#135c59]/10 text-[#135c59] flex items-center justify-center hover:bg-[#135c59]/20">
           <i class="fa-solid fa-xmark text-lg"></i>
         </button>
       </div>
 
+      <!-- Search & Category Bar -->
       <div class="px-5 sm:px-7 pt-4">
         <div class="relative">
           <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-[#135c59]/50"></i>
@@ -817,9 +820,30 @@
         <div id="shop-categories" class="mt-3 flex gap-2 overflow-x-auto pb-1"></div>
       </div>
 
-      <div id="shop-products" class="flex-1 overflow-y-auto px-5 sm:px-7 py-5">
+      <!-- Products List -->
+      <div id="shop-products" class="flex-1 overflow-y-auto px-5 sm:px-7 py-5 pb-24">
         <div data-i18n="loading_products" class="text-center py-12 text-[#2d2420]/60">Loading products...</div>
       </div>
+
+      <!-- Quick Cart Bottom Bar (شريط جمع الطلبات) -->
+      <div id="shop-cart-bar" class="hidden absolute bottom-0 inset-x-0 bg-white border-t border-[#135c59]/15 p-4 sm:px-7 shadow-2xl z-20 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-[#135c59]/10 text-[#135c59] flex items-center justify-center font-bold relative">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cart-badge-count" class="absolute -top-1.5 -right-1.5 bg-[#e05a5a] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-extrabold shadow-sm">0</span>
+          </div>
+          <div>
+            <div data-i18n="cart_items_selected" class="text-xs font-bold text-[#2d2420]/60">Selected Items:</div>
+            <div id="cart-summary-text" class="text-xs sm:text-sm font-extrabold text-[#135c59]">0 Items</div>
+          </div>
+        </div>
+
+        <button onclick="sendBulkCartOrder()" class="btn-primary py-3 px-5 sm:px-7 text-xs sm:text-sm bg-[#25D366] hover:bg-[#1eb957] text-white border-none shadow-md">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span data-i18n="btn_send_whatsapp_order">Send Order via WhatsApp</span>
+        </button>
+      </div>
+
     </div>
   </div>
 
@@ -827,6 +851,7 @@
     const SHOP_WHATSAPP = "201124333193";
     let shopProducts = [];
     let activeShopCategory = "All";
+    let cart = {}; // تخزين السلة: { slug: { name: '...', qty: 1 } }
 
     function getProductField(field, lang) {
       if (!field) return "";
@@ -891,6 +916,7 @@
         shopProducts = loaded;
         renderShopCategories();
         renderShopProducts();
+        updateCartUI();
 
       } catch (err) {
         console.error(err);
@@ -976,6 +1002,7 @@
 
         const productUrl = `/shop/product.html?slug=${encodeURIComponent(p.slug)}`;
         const productImage = `/shop/products/${encodeURIComponent(p.slug)}/${encodeURIComponent(p.image || "image.jpg")}`;
+        const currentQtyInCart = cart[p.slug] ? cart[p.slug].qty : 1;
 
         return `
           <article class="bg-white rounded-2xl border border-[#135c59]/10 overflow-hidden mb-4 shadow-sm">
@@ -998,12 +1025,13 @@
                       ? `
                         <div class="flex items-center border border-[#135c59]/15 rounded-xl overflow-hidden bg-[#fbf9f5]">
                           <button onclick="changeShopQty('${id}', -1)" class="w-9 h-9 text-[#135c59] font-bold">−</button>
-                          <span id="${id}" class="w-8 text-center font-bold text-[#135c59]">1</span>
+                          <span id="${id}" class="w-8 text-center font-bold text-[#135c59]">${currentQtyInCart}</span>
                           <button onclick="changeShopQty('${id}', 1)" class="w-9 h-9 text-[#135c59] font-bold">+</button>
                         </div>
 
-                        <button onclick="orderShopProduct('${p.slug}', '${escapeJs(pName)}', '${id}')" class="rounded-xl bg-[#135c59] text-white px-4 py-2 text-xs font-bold hover:opacity-90">
-                          <i class="fa-solid fa-cart-shopping ml-1"></i> ${lang === 'en' ? 'Order' : 'طلب'}
+                        <button onclick="addToCart('${p.slug}', '${escapeJs(pName)}', '${id}')" class="rounded-xl bg-[#135c59] text-white px-4 py-2 text-xs font-bold hover:opacity-90 flex items-center gap-1.5 transition">
+                          <i class="fa-solid fa-cart-plus"></i>
+                          <span>${lang === 'en' ? 'Add to Order' : 'إضافة للطلب'}</span>
                         </button>
                       `
                       : `
@@ -1033,14 +1061,56 @@
       el.textContent = qty;
     }
 
-    function orderShopProduct(slug, name, qtyId) {
-      const qty = document.getElementById(qtyId)?.textContent || "1";
-      const message = `أريد طلب: ${name}\nالكمية: ${qty}`;
+    function addToCart(slug, name, qtyId) {
+      const qty = parseInt(document.getElementById(qtyId)?.textContent || "1", 10);
+      cart[slug] = { name: name, qty: qty };
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const bar = document.getElementById("shop-cart-bar");
+      const badge = document.getElementById("cart-badge-count");
+      const summaryText = document.getElementById("cart-summary-text");
+      const lang = typeof currentLang !== 'undefined' ? currentLang : 'ar';
+
+      const totalItems = Object.keys(cart).length;
+
+      if (totalItems > 0) {
+        bar.classList.remove("hidden");
+        badge.textContent = totalItems;
+
+        let totalQty = 0;
+        for (let k in cart) totalQty += cart[k].qty;
+
+        summaryText.textContent = lang === 'en' 
+          ? `${totalItems} Product(s) (${totalQty} Items)`
+          : `${totalItems} منتج (${totalQty} قطعة)`;
+      } else {
+        bar.classList.add("hidden");
+      }
+    }
+
+    function sendBulkCartOrder() {
+      const lang = typeof currentLang !== 'undefined' ? currentLang : 'ar';
+      let message = lang === 'en' 
+        ? "Hello Furry4Ever, I would like to order the following items:\n\n"
+        : "مرحبًا Furry4Ever، أريد طلب المنتجات التالية:\n\n";
+
+      let index = 1;
+      for (let slug in cart) {
+        const item = cart[slug];
+        message += `${index}. ${item.name} (${lang === 'en' ? 'Qty' : 'الكمية'}: ${item.qty})\n`;
+        index++;
+      }
+
+      message += lang === 'en' ? "\nThank you!" : "\nشكراً لكم!";
+
       window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${encodeURIComponent(message)}`, "_blank");
     }
 
     function askShopProduct(name) {
-      const message = `استفسار عن: ${name}`;
+      const lang = typeof currentLang !== 'undefined' ? currentLang : 'ar';
+      const message = lang === 'en' ? `Inquiry about: ${name}` : `استفسار عن: ${name}`;
       window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${encodeURIComponent(message)}`, "_blank");
     }
 
