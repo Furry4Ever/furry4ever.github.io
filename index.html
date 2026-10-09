@@ -183,13 +183,20 @@
           </div>
         </a>
 
-        <!-- Desktop Navigation Links -->
-        <nav class="hidden md:flex items-center gap-8">
+                <!-- Desktop Navigation Links & Language Button -->
+        <nav class="hidden md:flex items-center gap-6">
           <button onclick="openServicesModal()" class="text-[#2d2420]/80 hover:text-[#135c59] text-sm font-semibold transition-colors flex items-center gap-1.5">
-            <span>Services</span>
+            <span data-i18n="nav_services">Services</span>
             <i class="fa-solid fa-chevron-down text-xs text-[#135c59]"></i>
           </button>
+
+          <!-- زرار تغيير اللغة -->
+          <button onclick="setLanguage(currentLang === 'en' ? 'ar' : 'en')" class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#135c59]/20 text-[#135c59] hover:bg-[#135c59]/10 text-xs font-bold transition-colors">
+            <i class="fa-solid fa-globe text-sm"></i>
+            <span class="lang-btn-text">عربي</span>
+          </button>
         </nav>
+
 
         <!-- Right Action Items (Socials & Top Book Button) -->
         <div class="hidden sm:flex items-center gap-3">
