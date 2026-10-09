@@ -198,31 +198,42 @@
         </nav>
 
 
-        <!-- Right Action Items (Socials & Top Book Button) -->
-        <div class="hidden sm:flex items-center gap-3">
-          <a href="https://www.facebook.com/profile.php?id=61592649189328" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-[#135c59]/5 hover:bg-[#135c59]/10 flex items-center justify-center text-[#135c59] transition-colors" title="Facebook">
-            <i class="fa-brands fa-facebook-f text-base"></i>
-          </a>
-          <a href="https://wa.me/201124333193" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 flex items-center justify-center text-[#25D366] transition-colors" title="WhatsApp">
-            <i class="fa-brands fa-whatsapp text-lg"></i>
-          </a>
+                <!-- Right Action Items (Socials & Top Book Button) -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          
+          <div class="hidden sm:flex items-center gap-3">
+            <a href="https://www.facebook.com/profile.php?id=61592649189328" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-[#135c59]/5 hover:bg-[#135c59]/10 flex items-center justify-center text-[#135c59] transition-colors" title="Facebook">
+              <i class="fa-brands fa-facebook-f text-base"></i>
+            </a>
+            <a href="https://wa.me/201124333193" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 flex items-center justify-center text-[#25D366] transition-colors" title="WhatsApp">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+            </a>
 
-          <!-- Top Shop + Appointment CTA Buttons -->
-          <button onclick="openShopModal()" class="btn-secondary text-sm py-2.5 px-5">
-            <i class="fa-solid fa-cart-shopping text-sm"></i>
-            <span>Shop</span>
+            <!-- Top Shop + Appointment CTA Buttons -->
+            <button onclick="openShopModal()" class="btn-secondary text-sm py-2.5 px-5">
+              <i class="fa-solid fa-cart-shopping text-sm"></i>
+              <span data-i18n="nav_shop">Shop</span>
+            </button>
+            <button onclick="openBookingModal()" class="btn-primary text-sm py-2.5 px-5">
+              <i class="fa-solid fa-calendar-check text-sm"></i>
+              <span data-i18n="nav_book">Book Appointment</span>
+            </button>
+          </div>
+
+          <!-- زرار تغيير اللغة (ظاهر في الموبايل والكمبيوتر فوق ثابت) -->
+          <button onclick="setLanguage(currentLang === 'en' ? 'ar' : 'en')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#135c59]/20 text-[#135c59] hover:bg-[#135c59]/10 text-xs font-bold transition-colors">
+            <i class="fa-solid fa-globe text-sm"></i>
+            <span class="lang-btn-text">عربي</span>
           </button>
-          <button onclick="openBookingModal()" class="btn-primary text-sm py-2.5 px-5">
-            <i class="fa-solid fa-calendar-check text-sm"></i>
-            <span>Book Appointment</span>
+
+          <!-- Mobile Menu Toggle Button (Hamburger ☰ Icon) -->
+          <button onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu" class="md:hidden p-2 text-[#135c59] rounded-lg hover:bg-[#135c59]/10 focus:outline-none flex items-center justify-center">
+            <i id="menu-icon-bars" class="fa-solid fa-bars text-2xl"></i>
+            <i id="menu-icon-close" class="fa-solid fa-xmark text-2xl hidden"></i>
           </button>
+
         </div>
 
-        <!-- Mobile Menu Toggle Button (Hamburger ☰ Icon) -->
-        <button onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu" class="md:hidden p-2 text-[#135c59] rounded-lg hover:bg-[#135c59]/10 focus:outline-none flex items-center justify-center">
-          <i id="menu-icon-bars" class="fa-solid fa-bars text-2xl"></i>
-          <i id="menu-icon-close" class="fa-solid fa-xmark text-2xl hidden"></i>
-        </button>
       </div>
     </div>
 
