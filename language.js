@@ -101,7 +101,7 @@ const translations = {
     lang_btn: "English",
 
     // Hero Section
-    hero_badge: "للرعاية البيطرية Furry4Ever",
+    hero_badge: "Furry4Ever للرعاية البيطرية",
     hero_title: "هذه الأرواح هي مهمتنا",
     hero_subtitle: "رعاية بيطرية متخصصة لأليفك العزيز في المنزل",
     btn_book: "احجز زيارة منزلية",
@@ -133,7 +133,7 @@ const translations = {
     footer_contact_us: "تواصل معنا",
     footer_location: "القاهرة، مصر",
     footer_whatsapp_direct: "حجز مباشر عبر الواتساب",
-    footer_rights: "© 2026  للرعاية البيطرية. جميع الحقوق محفوظة Furry4Ever.",
+    footer_rights: "© 2026 Furry4Ever للرعاية البيطرية. جميع الحقوق محفوظة.",
     footer_motto: '"هذه الأرواح هي مهمتنا"',
 
     // Booking Modal
