@@ -1,7 +1,16 @@
 {
-  "name": "فرشاه لإزالة الشعر والوبر من الملابس",
-  "category": "Supplies",
+  "name": {
+    "ar": "فرشاة لإزالة الشعر والوبر من الملابس",
+    "en": "Pet Hair & Lint Remover Brush"
+  },
+  "category": {
+    "ar": "مستلزمات وأدوات",
+    "en": "Supplies"
+  },
+  "description": {
+    "ar": "فرشاة عملية لإزالة شعر الألياف والوبر بفاعلية من الملابس والأثاث.",
+    "en": "Effective lint and pet hair remover brush for clothes and furniture."
+  },
   "image": "image.jpg",
-  "description": "فرشاه لإزالة الشعر والوبر من الملابس.",
   "available": true
 }
