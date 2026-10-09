@@ -42,6 +42,7 @@ const translations = {
     footer_location: "Cairo, Egypt",
     footer_whatsapp_direct: "WhatsApp Direct Booking",
     footer_rights: "© 2026 Furry4Ever Pets Veterinary Care. All rights reserved.",
+    footer_rights_text: "Pets Veterinary Care. All rights reserved.",
     footer_motto: '"These souls are our mission"',
 
     // Booking Modal
@@ -49,6 +50,10 @@ const translations = {
     modal_book_title: "Book an Appointment",
     modal_book_sub: "Fill in the details below and our team will contact you promptly.",
     form_owner_name: "Owner Name *",
+    form_pet_type: "Pet Type *",
+    pet_type_cat: "Cat",
+    pet_type_dog: "Dog",
+    pet_type_other: "Other",
     form_pet_name: "Pet Name *",
     form_gender: "Gender *",
     form_male: "Male",
@@ -88,7 +93,12 @@ const translations = {
     srv5_title: "Hygienic Grooming",
     srv5_desc: "Gentle, stress-free grooming and sanitary care designed to keep pets clean and comfortable.",
     srv_custom_title: "Need custom medical care for your pet?",
-    srv_custom_desc: "Contact us directly via WhatsApp for tailored visit planning."
+    srv_custom_desc: "Contact us directly via WhatsApp for tailored visit planning.",
+
+    // Shop Modal
+    shop_sub: "Select a product and quantity then click Order or Inquire",
+    placeholder_search: "Search for a product...",
+    loading_products: "Loading products..."
   },
 
   ar: {
@@ -116,7 +126,7 @@ const translations = {
     about_desc: "نعلم أن الذهاب للعيادات قد يكون مرهقاً لأليفك. فريقنا البيطري يقدم الفحوصات الطبية، التطعيمات، والرعاية التمريضية المتخصصة مباشرة في منزلك.",
 
     // Why Furry4Ever Section
-    why_tag: "؟Furry4Ever لماذا",
+    why_tag: "لماذا Furry4Ever؟",
     why_title: "الرعاية، الراحة والثقة",
     why_card1_title: "رعاية بيطرية احترافية",
     why_card1_desc: "خدمة بيطرية متكاملة تراعي راحة أليفك وسلامته أولاً.",
@@ -134,6 +144,7 @@ const translations = {
     footer_location: "القاهرة، مصر",
     footer_whatsapp_direct: "حجز مباشر عبر الواتساب",
     footer_rights: "© 2026 Furry4Ever للرعاية البيطرية. جميع الحقوق محفوظة.",
+    footer_rights_text: "للرعاية البيطرية. جميع الحقوق محفوظة.",
     footer_motto: '"هذه الأرواح هي مهمتنا"',
 
     // Booking Modal
@@ -141,6 +152,10 @@ const translations = {
     modal_book_title: "احجز موعداً",
     modal_book_sub: "أدخل التفاصيل أدناه وسيتواصل معك فريقنا في أقرب وقت.",
     form_owner_name: "اسم المالك *",
+    form_pet_type: "نوع الحيوان *",
+    pet_type_cat: "قطة",
+    pet_type_dog: "كلب",
+    pet_type_other: "آخر",
     form_pet_name: "اسم الأليف *",
     form_gender: "جنس الأليف *",
     form_male: "ذكر",
@@ -180,7 +195,12 @@ const translations = {
     srv5_title: "العناية والنظافة (Grooming)",
     srv5_desc: "جلسات عناية ونظافة هادئة وبدون توتر للحفاظ على نظافة وراحة أليفك.",
     srv_custom_title: "تحتاج رعاية طبية خاصة لأليفك؟",
-    srv_custom_desc: "تواصل معنا مباشرة عبر الواتساب لتنسيق زيارة مخصصة."
+    srv_custom_desc: "تواصل معنا مباشرة عبر الواتساب لتنسيق زيارة مخصصة.",
+
+    // Shop Modal
+    shop_sub: "اختر المنتج والكمية ثم اضغط طلب أو استفسار",
+    placeholder_search: "ابحث عن منتج...",
+    loading_products: "جاري تحميل المنتجات..."
   }
 };
 
@@ -210,11 +230,17 @@ function setLanguage(lang) {
     }
   });
 
-  // 4. تحديث نص زرار اللغة في الهيدر
+  // 4. تحديث نص زر اللغة في الهيدر
   const langBtnTexts = document.querySelectorAll('.lang-btn-text');
   langBtnTexts.forEach(btn => {
     btn.textContent = translations[lang].lang_btn;
   });
+
+  // 5. إعادة تحديث أقسام المنتجات في المتجر إذا كان مفتوحاً
+  if (typeof renderShopCategories === 'function' && typeof renderShopProducts === 'function' && typeof shopProducts !== 'undefined' && shopProducts.length > 0) {
+    renderShopCategories();
+    renderShopProducts();
+  }
 }
 
 // تشغيل اللغة عند تحميل الصفحة
