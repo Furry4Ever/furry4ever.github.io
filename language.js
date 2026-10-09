@@ -95,10 +95,13 @@ const translations = {
     srv_custom_title: "Need custom medical care for your pet?",
     srv_custom_desc: "Contact us directly via WhatsApp for tailored visit planning.",
 
-    // Shop Modal
-    shop_sub: "Select a product and quantity then click Order or Inquire",
+    // Shop Modal & Cart
+    shop_sub: "Select products and quantities, then send your order via WhatsApp",
     placeholder_search: "Search for a product...",
-    loading_products: "Loading products..."
+    loading_products: "Loading products...",
+    btn_add_cart: "Add to Order",
+    cart_items_selected: "Selected Items:",
+    btn_send_whatsapp_order: "Send Order via WhatsApp"
   },
 
   ar: {
@@ -197,10 +200,13 @@ const translations = {
     srv_custom_title: "تحتاج رعاية طبية خاصة لأليفك؟",
     srv_custom_desc: "تواصل معنا مباشرة عبر الواتساب لتنسيق زيارة مخصصة.",
 
-    // Shop Modal
-    shop_sub: "اختر المنتج والكمية ثم اضغط طلب أو استفسار",
+    // Shop Modal & Cart
+    shop_sub: "اختر المنتجات والكميات، ثم أرسل الطلب دفعة واحدة عبر الواتساب",
     placeholder_search: "ابحث عن منتج...",
-    loading_products: "جاري تحميل المنتجات..."
+    loading_products: "جاري تحميل المنتجات...",
+    btn_add_cart: "إضافة للطلب",
+    cart_items_selected: "المنتجات المحددة:",
+    btn_send_whatsapp_order: "إرسال الطلب عبر الواتساب"
   }
 };
 
@@ -236,10 +242,11 @@ function setLanguage(lang) {
     btn.textContent = translations[lang].lang_btn;
   });
 
-  // 5. إعادة تحديث أقسام المنتجات في المتجر إذا كان مفتوحاً
+  // 5. إعادة تحديث أقسام المنتجات وشريط السلة في المتجر إذا كان مفتوحاً
   if (typeof renderShopCategories === 'function' && typeof renderShopProducts === 'function' && typeof shopProducts !== 'undefined' && shopProducts.length > 0) {
     renderShopCategories();
     renderShopProducts();
+    if (typeof updateCartUI === 'function') updateCartUI();
   }
 }
 
