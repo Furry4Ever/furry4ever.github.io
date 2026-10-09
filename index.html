@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" dir="ltr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -183,22 +183,15 @@
           </div>
         </a>
 
-                <!-- Desktop Navigation Links & Language Button -->
+        <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center gap-6">
           <button onclick="openServicesModal()" class="text-[#2d2420]/80 hover:text-[#135c59] text-sm font-semibold transition-colors flex items-center gap-1.5">
             <span data-i18n="nav_services">Services</span>
             <i class="fa-solid fa-chevron-down text-xs text-[#135c59]"></i>
           </button>
-
-          <!-- زرار تغيير اللغة -->
-          <button onclick="setLanguage(currentLang === 'en' ? 'ar' : 'en')" class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#135c59]/20 text-[#135c59] hover:bg-[#135c59]/10 text-xs font-bold transition-colors">
-            <i class="fa-solid fa-globe text-sm"></i>
-            <span class="lang-btn-text">عربي</span>
-          </button>
         </nav>
 
-
-                <!-- Right Action Items (Socials & Top Book Button) -->
+        <!-- Right Action Items (Socials, Top Book & Main Language Button) -->
         <div class="flex items-center gap-2 sm:gap-3">
           
           <div class="hidden sm:flex items-center gap-3">
@@ -220,7 +213,7 @@
             </button>
           </div>
 
-          <!-- زرار تغيير اللغة (ظاهر في الموبايل والكمبيوتر فوق ثابت) -->
+          <!-- Language Switcher Button -->
           <button onclick="setLanguage(currentLang === 'en' ? 'ar' : 'en')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#135c59]/20 text-[#135c59] hover:bg-[#135c59]/10 text-xs font-bold transition-colors">
             <i class="fa-solid fa-globe text-sm"></i>
             <span class="lang-btn-text">عربي</span>
@@ -240,14 +233,14 @@
     <!-- Mobile Dropdown Navigation -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-[#135c59]/10 bg-[#fbf9f5] px-4 pt-4 pb-6 space-y-3 shadow-lg">
       <button onclick="openServicesModal(); toggleMobileMenu();" class="w-full text-left py-2 text-[#2d2420] font-semibold flex items-center justify-between">
-        <span>Services</span>
+        <span data-i18n="nav_services">Services</span>
         <i class="fa-solid fa-chevron-right text-xs text-[#135c59]"></i>
       </button>
       <button onclick="openShopModal(); toggleMobileMenu();" class="w-full text-left py-2 text-[#2d2420] font-semibold flex items-center gap-2">
         <i class="fa-solid fa-cart-shopping text-[#135c59]"></i>
-        <span>Shop</span>
+        <span data-i18n="nav_shop">Shop</span>
       </button>
-      <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-[#2d2420] font-semibold">About Us</a>
+      <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-[#2d2420] font-semibold" data-i18n="nav_about">About Us</a>
       
       <div class="pt-4 border-t border-[#135c59]/10 flex flex-col gap-3">
         <div class="flex items-center gap-3">
@@ -263,11 +256,11 @@
         <div class="flex items-center gap-2">
           <button onclick="openShopModal(); toggleMobileMenu();" class="btn-secondary text-xs py-3 px-3 flex-1 justify-center">
             <i class="fa-solid fa-cart-shopping"></i>
-            <span>Shop</span>
+            <span data-i18n="nav_shop">Shop</span>
           </button>
           <button onclick="openBookingModal(); toggleMobileMenu();" class="btn-primary text-xs py-3 px-3 flex-1 justify-center">
             <i class="fa-solid fa-calendar-check"></i>
-            <span>Book Appointment</span>
+            <span data-i18n="nav_book">Book Appointment</span>
           </button>
         </div>
       </div>
@@ -286,16 +279,14 @@
           <div>
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#135c59]/10 text-[#135c59] text-xs font-bold uppercase tracking-wider mb-6">
               <i class="fa-solid fa-wand-magic-sparkles text-[#d9822b]"></i>
-              <span>Furry4Ever Pets Veterinary Care</span>
+              <span data-i18n="hero_badge">Furry4Ever Pets Veterinary Care</span>
             </div>
 
-            <!-- Single line headline -->
-            <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-[#135c59] leading-tight mb-6">
+            <h1 data-i18n="hero_title" class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-[#135c59] leading-tight mb-6">
               These souls are our mission
             </h1>
 
-            <!-- Single line subheading -->
-            <p class="text-xs sm:text-base md:text-lg lg:text-xl text-[#2d2420]/80 mb-10 leading-relaxed font-medium">
+            <p data-i18n="hero_subtitle" class="text-xs sm:text-base md:text-lg lg:text-xl text-[#2d2420]/80 mb-10 leading-relaxed font-medium">
               Specialized veterinary care for your beloved pets
             </p>
 
@@ -303,16 +294,16 @@
               <div class="grid grid-cols-2 gap-3">
                 <button onclick="openBookingModal()" class="btn-primary text-sm sm:text-base py-3.5 px-3 sm:px-6 justify-center">
                   <i class="fa-solid fa-calendar-check"></i>
-                  <span>Book an Appointment</span>
+                  <span data-i18n="btn_book">Book an Appointment</span>
                 </button>
                 <button onclick="openShopModal()" class="btn-secondary text-sm sm:text-base py-3.5 px-3 sm:px-6 justify-center">
                   <i class="fa-solid fa-cart-shopping"></i>
-                  <span>Shop Now</span>
+                  <span data-i18n="btn_shop">Shop Now</span>
                 </button>
               </div>
               <button onclick="openServicesModal()" class="btn-secondary text-sm sm:text-base py-3.5 px-3 sm:px-6 justify-center w-full">
                 <i class="fa-solid fa-stethoscope"></i>
-                <span>View Services</span>
+                <span data-i18n="btn_services">View Services</span>
               </button>
             </div>
 
@@ -322,19 +313,19 @@
                 <div class="p-2 rounded-xl bg-[#135c59]/10 text-[#135c59] w-9 h-9 flex items-center justify-center">
                   <i class="fa-solid fa-house text-sm"></i>
                 </div>
-                <span class="text-xs font-bold text-[#2d2420]/80">Home Visits</span>
+                <span data-i18n="badge_home" class="text-xs font-bold text-[#2d2420]/80">Home Visits</span>
               </div>
               <div class="flex items-center gap-2.5">
                 <div class="p-2 rounded-xl bg-[#e05a5a]/10 text-[#e05a5a] w-9 h-9 flex items-center justify-center">
                   <i class="fa-solid fa-heart text-sm"></i>
                 </div>
-                <span class="text-xs font-bold text-[#2d2420]/80">Stress-Free Care</span>
+                <span data-i18n="badge_stress" class="text-xs font-bold text-[#2d2420]/80">Stress-Free Care</span>
               </div>
               <div class="flex items-center gap-2.5 col-span-2 sm:col-span-1">
                 <div class="p-2 rounded-xl bg-[#d9822b]/10 text-[#d9822b] w-9 h-9 flex items-center justify-center">
                   <i class="fa-solid fa-user-doctor text-sm"></i>
                 </div>
-                <span class="text-xs font-bold text-[#2d2420]/80">Professional Care</span>
+                <span data-i18n="badge_pro" class="text-xs font-bold text-[#2d2420]/80">Professional Care</span>
               </div>
             </div>
           </div>
@@ -354,23 +345,22 @@
     <section id="about" class="py-16 bg-white/60 border-y border-[#135c59]/10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-12">
-          <h2 class="text-3xl sm:text-4xl font-display font-bold text-[#135c59] mb-4">
+          <h2 data-i18n="about_title" class="text-3xl sm:text-4xl font-display font-bold text-[#135c59] mb-4">
             Compassionate Home-Visit Veterinary Care
           </h2>
-          <p class="text-[#2d2420]/75 text-base sm:text-lg">
+          <p data-i18n="about_desc" class="text-[#2d2420]/75 text-base sm:text-lg">
             We understand that hospital trips can be stressful for your pets. Our veterinary team brings professional health assessments, vaccinations, and specialized nursing directly to your home.
           </p>
-        </div></div>
+        </div>
+      </div>
     </section>
-
-    <!-- KNOWLEDGE BASE SECTION -->
 
     <!-- WHY FURRY4EVER -->
     <section id="why-furry4ever" class="py-16 sm:py-20">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10 sm:mb-12">
-          <p class="text-[#d9822b] font-bold uppercase tracking-[0.2em] text-xs sm:text-sm mb-2">Why Furry4Ever?</p>
-          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#135c59]">Care, Convenience & Trust</h2>
+          <p data-i18n="why_tag" class="text-[#d9822b] font-bold uppercase tracking-[0.2em] text-xs sm:text-sm mb-2">Why Furry4Ever?</p>
+          <h2 data-i18n="why_title" class="font-display font-extrabold text-3xl sm:text-4xl text-[#135c59]">Care, Convenience & Trust</h2>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -378,38 +368,38 @@
             <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#135c59]/10 flex items-center justify-center text-[#135c59]">
               <i class="fa-solid fa-paw text-2xl"></i>
             </div>
-            <h3 class="font-display font-bold text-lg text-[#2d2420] mb-2">Professional Veterinary Care</h3>
-            <p class="text-sm text-[#2d2420]/65 leading-relaxed">Professional veterinary care with your pet's comfort and wellbeing in mind.</p>
+            <h3 data-i18n="why_card1_title" class="font-display font-bold text-lg text-[#2d2420] mb-2">Professional Veterinary Care</h3>
+            <p data-i18n="why_card1_desc" class="text-sm text-[#2d2420]/65 leading-relaxed">Professional veterinary care with your pet's comfort and wellbeing in mind.</p>
           </div>
 
           <div class="bg-white/80 rounded-3xl p-6 text-center border border-[#135c59]/10 shadow-sm hover:shadow-md transition-shadow">
             <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#d9822b]/10 flex items-center justify-center text-[#d9822b]">
               <i class="fa-solid fa-house text-2xl"></i>
             </div>
-            <h3 class="font-display font-bold text-lg text-[#2d2420] mb-2">Home Veterinary Visits</h3>
-            <p class="text-sm text-[#2d2420]/65 leading-relaxed">Convenient veterinary visits at home, where your pet feels safe and comfortable.</p>
+            <h3 data-i18n="why_card2_title" class="font-display font-bold text-lg text-[#2d2420] mb-2">Home Veterinary Visits</h3>
+            <p data-i18n="why_card2_desc" class="text-sm text-[#2d2420]/65 leading-relaxed">Convenient veterinary visits at home, where your pet feels safe and comfortable.</p>
           </div>
 
           <div class="bg-white/80 rounded-3xl p-6 text-center border border-[#135c59]/10 shadow-sm hover:shadow-md transition-shadow">
             <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#e05a5a]/10 flex items-center justify-center text-[#e05a5a]">
               <i class="fa-solid fa-bag-shopping text-2xl"></i>
             </div>
-            <h3 class="font-display font-bold text-lg text-[#2d2420] mb-2">Pet Products</h3>
-            <p class="text-sm text-[#2d2420]/65 leading-relaxed">Useful pet products and essentials, easy to order when you need them.</p>
+            <h3 data-i18n="why_card3_title" class="font-display font-bold text-lg text-[#2d2420] mb-2">Pet Products</h3>
+            <p data-i18n="why_card3_desc" class="text-sm text-[#2d2420]/65 leading-relaxed">Useful pet products and essentials, easy to order when you need them.</p>
           </div>
 
           <div class="bg-white/80 rounded-3xl p-6 text-center border border-[#135c59]/10 shadow-sm hover:shadow-md transition-shadow">
             <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#25D366]/10 flex items-center justify-center text-[#25D366]">
               <i class="fa-brands fa-whatsapp text-2xl"></i>
             </div>
-            <h3 class="font-display font-bold text-lg text-[#2d2420] mb-2">Easy Booking & Support</h3>
-            <p class="text-sm text-[#2d2420]/65 leading-relaxed">Book a visit or ask your questions easily through WhatsApp.</p>
+            <h3 data-i18n="why_card4_title" class="font-display font-bold text-lg text-[#2d2420] mb-2">Easy Booking & Support</h3>
+            <p data-i18n="why_card4_desc" class="text-sm text-[#2d2420]/65 leading-relaxed">Book a visit or ask your questions easily through WhatsApp.</p>
           </div>
         </div>
       </div>
     </section>
 
-</main>
+  </main>
 
   <!-- BOTTOM INFORMATION BAR / FOOTER -->
   <footer class="bg-[#135c59] text-white pt-16 pb-8">
@@ -429,7 +419,7 @@
               </span>
             </div>
           </div>
-          <p class="text-white/80 leading-relaxed max-w-md">
+          <p data-i18n="footer_desc" class="text-white/80 leading-relaxed max-w-md">
             Dedicated to the health, comfort, and wellness of your pets.
           </p>
           <div class="flex gap-3 pt-2">
@@ -444,22 +434,22 @@
 
         <!-- Middle: Quick Navigation Links -->
         <div>
-          <h4 class="text-lg font-display font-bold mb-4 text-[#d9822b]">Quick Links</h4>
+          <h4 data-i18n="footer_quick_links" class="text-lg font-display font-bold mb-4 text-[#d9822b]">Quick Links</h4>
           <ul class="space-y-2.5 text-sm text-white/80">
-            <li><button onclick="openServicesModal()" class="hover:text-white transition-colors">Services Menu</button></li>
-            <li><button onclick="openBookingModal()" class="hover:text-white transition-colors">Book a Home Visit</button></li>
+            <li><button onclick="openServicesModal()" data-i18n="modal_services_title" class="hover:text-white transition-colors">Home Visit Care Menu</button></li>
+            <li><button onclick="openBookingModal()" data-i18n="btn_book" class="hover:text-white transition-colors">Book an Appointment</button></li>
           </ul>
         </div>
 
         <!-- Right: Full Contact Information Bar -->
         <div>
-          <h4 class="text-lg font-display font-bold mb-4 text-[#d9822b]">Contact Us</h4>
+          <h4 data-i18n="footer_contact_us" class="text-lg font-display font-bold mb-4 text-[#d9822b]">Contact Us</h4>
           <ul class="space-y-3.5 text-sm text-white/80">
             <li class="flex items-center gap-3">
               <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[#d9822b]">
                 <i class="fa-solid fa-location-dot"></i>
               </div>
-              <span>Cairo, Egypt</span>
+              <span data-i18n="footer_location">Cairo, Egypt</span>
             </li>
             <li class="flex items-center gap-3">
               <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[#d9822b]">
@@ -471,7 +461,7 @@
               <div class="w-8 h-8 rounded-full bg-[#25D366]/20 flex items-center justify-center text-[#25D366]">
                 <i class="fa-brands fa-whatsapp text-base"></i>
               </div>
-              <a href="https://wa.me/201124333193" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors font-medium">WhatsApp Direct Booking</a>
+              <a href="https://wa.me/201124333193" target="_blank" rel="noopener noreferrer" data-i18n="footer_whatsapp_direct" class="hover:text-white transition-colors font-medium">WhatsApp Direct Booking</a>
             </li>
           </ul>
         </div>
@@ -480,8 +470,8 @@
 
       <!-- Copyright Bar -->
       <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-4">
-        <p>&copy; 2026 Furry4Ever Pets Veterinary Care. All rights reserved.</p>
-        <p class="font-medium text-white/80">"These souls are our mission"</p>
+        <p data-i18n="footer_rights">&copy; 2026 Furry4Ever Pets Veterinary Care. All rights reserved.</p>
+        <p data-i18n="footer_motto" class="font-medium text-white/80">"These souls are our mission"</p>
       </div>
     </div>
   </footer>
@@ -499,87 +489,86 @@
         </button>
         <div class="flex items-center gap-2 text-[#d9822b] text-xs font-bold uppercase tracking-wider mb-2">
           <i class="fa-solid fa-wand-magic-sparkles"></i>
-          <span>Home Visit Care Request</span>
+          <span data-i18n="modal_book_tag">Home Visit Care Request</span>
         </div>
-        <h2 class="text-2xl sm:text-3xl font-display font-bold">Book an Appointment</h2>
-        <p class="text-white/80 text-sm mt-1">Fill in the details below and our team will contact you promptly.</p>
+        <h2 data-i18n="modal_book_title" class="text-2xl sm:text-3xl font-display font-bold">Book an Appointment</h2>
+        <p data-i18n="modal_book_sub" class="text-white/80 text-sm mt-1">Fill in the details below and our team will contact you promptly.</p>
       </div>
 
       <!-- Form Body -->
-<div id="booking-form-container" class="p-6 sm:p-8">
-  <form id="booking-form" class="space-y-4">
-    <input type="hidden" name="access_key" value="96a85d2d-8127-47d2-ab14-c60c00da5801">
-    
-    <div>
-      <label class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Owner Name *</label>
-      <input type="text" name="owner_name" required placeholder="Your Name" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
-    </div>
+      <div id="booking-form-container" class="p-6 sm:p-8">
+        <form id="booking-form" class="space-y-4">
+          <input type="hidden" name="access_key" value="96a85d2d-8127-47d2-ab14-c60c00da5801">
+          
+          <div>
+            <label data-i18n="form_owner_name" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Owner Name *</label>
+            <input type="text" name="owner_name" required data-i18n-placeholder="placeholder_owner" placeholder="Your Name" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
+          </div>
 
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <label class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Pet Name *</label>
-        <input type="text" name="pet_name" required placeholder="e.g. Bella" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
-      </div>
-      <div>
-        <label class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Gender *</label>
-        <input type="hidden" name="gender" id="gender-input" value="Male">
-        <div class="grid grid-cols-2 gap-2">
-          <button type="button" id="gender-male" onclick="setGender('Male')" class="py-3 px-2 rounded-xl border border-[#135c59]/20 text-xs font-bold text-[#135c59] bg-[#fbf9f5] transition-all">Male</button>
-          <button type="button" id="gender-female" onclick="setGender('Female')" class="py-3 px-2 rounded-xl border border-[#135c59]/20 text-xs font-bold text-[#135c59] bg-[#fbf9f5] transition-all">Female</button>
-        </div>
-      </div>
-    </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label data-i18n="form_pet_name" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Pet Name *</label>
+              <input type="text" name="pet_name" required data-i18n-placeholder="placeholder_pet" placeholder="e.g. Bella" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
+            </div>
+            <div>
+              <label data-i18n="form_gender" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Gender *</label>
+              <input type="hidden" name="gender" id="gender-input" value="Male">
+              <div class="grid grid-cols-2 gap-2">
+                <button type="button" id="gender-male" onclick="setGender('Male')" data-i18n="form_male" class="py-3 px-2 rounded-xl border border-[#135c59]/20 text-xs font-bold text-[#135c59] bg-[#fbf9f5] transition-all">Male</button>
+                <button type="button" id="gender-female" onclick="setGender('Female')" data-i18n="form_female" class="py-3 px-2 rounded-xl border border-[#135c59]/20 text-xs font-bold text-[#135c59] bg-[#fbf9f5] transition-all">Female</button>
+              </div>
+            </div>
+          </div>
 
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <label class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Pet Age *</label>
-        <input type="number" name="pet_age" required min="0" placeholder="e.g. 3" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
-      </div>
-      <div>
-        <label class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Age Unit</label>
-        <select name="age_unit" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm">
-          <option value="Years">Years</option>
-          <option value="Months">Months</option>
-        </select>
-      </div>
-    </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label data-i18n="form_pet_age" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Pet Age *</label>
+              <input type="number" name="pet_age" required min="0" placeholder="e.g. 3" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
+            </div>
+            <div>
+              <label data-i18n="form_age_unit" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Age Unit</label>
+              <select name="age_unit" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm">
+                <option value="Years" data-i18n="unit_years">Years</option>
+                <option value="Months" data-i18n="unit_months">Months</option>
+              </select>
+            </div>
+          </div>
 
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <label class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Phone Number *</label>
-        <input type="tel" name="phone" required placeholder="01124333193" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label data-i18n="form_phone" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Phone Number *</label>
+              <input type="tel" name="phone" required data-i18n-placeholder="placeholder_phone" placeholder="01124333193" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
+            </div>
+            <div>
+              <label data-i18n="form_date" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Preferred Date *</label>
+              <input type="date" name="preferred_date" required class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
+            </div>
+          </div>
+
+          <div>
+            <label data-i18n="form_reason" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Reason for Visit</label>
+            <textarea name="reason" rows="3" data-i18n-placeholder="placeholder_reason" placeholder="Describe symptoms, vaccination request, or routine check-up details..." class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm"></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary w-full py-3.5 mt-2">
+            <i class="fa-solid fa-circle-check"></i>
+            <span data-i18n="btn_confirm_booking">Confirm Booking Request</span>
+          </button>
+        </form>
       </div>
-      <div>
-        <label class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Preferred Date *</label>
-        <input type="date" name="preferred_date" required class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
-      </div>
-    </div>
-
-    <div>
-      <label class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Reason for Visit</label>
-      <textarea name="reason" rows="3" placeholder="Describe symptoms, vaccination request, or routine check-up details..." class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm"></textarea>
-    </div>
-
-    <button type="submit" class="btn-primary w-full py-3.5 mt-2">
-      <i class="fa-solid fa-circle-check"></i>
-      <span>Confirm Booking Request</span>
-    </button>
-  </form>
-</div>
-
 
       <!-- Success Screen -->
       <div id="booking-success-container" class="hidden p-8 text-center space-y-4">
         <div class="w-16 h-16 bg-[#135c59]/10 text-[#135c59] rounded-full flex items-center justify-center mx-auto">
           <i class="fa-solid fa-circle-check text-4xl"></i>
         </div>
-        <h3 class="text-2xl font-display font-bold text-[#135c59]">Appointment Request Received!</h3>
-        <p class="text-sm text-[#2d2420]/80 leading-relaxed max-w-md mx-auto">
+        <h3 data-i18n="success_title" class="text-2xl font-display font-bold text-[#135c59]">Appointment Request Received!</h3>
+        <p data-i18n="success_desc" class="text-sm text-[#2d2420]/80 leading-relaxed max-w-md mx-auto">
           Thank you for choosing Furry4Ever. Our veterinary care coordinator will contact you via phone or WhatsApp shortly to confirm your visit time.
         </p>
         <div class="pt-4">
           <button onclick="closeBookingModal()" class="btn-primary text-sm py-2.5 px-6">
-            <span>Close Window</span>
+            <span data-i18n="btn_close">Close Window</span>
           </button>
         </div>
       </div>
@@ -600,10 +589,10 @@
         </button>
         <div class="flex items-center gap-2 text-[#d9822b] text-xs font-bold uppercase tracking-wider mb-2">
           <i class="fa-solid fa-wand-magic-sparkles"></i>
-          <span>Our Veterinary Services</span>
+          <span data-i18n="modal_services_tag">Our Veterinary Services</span>
         </div>
-        <h2 class="text-2xl sm:text-3xl font-display font-bold">Home Visit Care Menu</h2>
-        <p class="text-white/80 text-sm mt-1">Explore our specialized services delivered directly to your home.</p>
+        <h2 data-i18n="modal_services_title" class="text-2xl sm:text-3xl font-display font-bold">Home Visit Care Menu</h2>
+        <p data-i18n="modal_services_sub" class="text-white/80 text-sm mt-1">Explore our specialized services delivered directly to your home.</p>
       </div>
 
       <!-- Services Grid Content -->
@@ -617,10 +606,10 @@
                 <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center">
                   <i class="fa-solid fa-stethoscope text-lg"></i>
                 </div>
-                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#135c59]/10 text-[#135c59] uppercase tracking-wider">Popular</span>
+                <span data-i18n="srv_popular" class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#135c59]/10 text-[#135c59] uppercase tracking-wider">Popular</span>
               </div>
-              <h3 class="text-lg font-display font-bold text-[#135c59] mb-1.5">Comprehensive Check-ups</h3>
-              <p class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Thorough medical health assessments in the comfort and peace of your home.</p>
+              <h3 data-i18n="srv1_title" class="text-lg font-display font-bold text-[#135c59] mb-1.5">Comprehensive Check-ups</h3>
+              <p data-i18n="srv1_desc" class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Thorough medical health assessments in the comfort and peace of your home.</p>
             </div>
           </div>
 
@@ -632,8 +621,8 @@
                   <i class="fa-solid fa-syringe text-lg"></i>
                 </div>
               </div>
-              <h3 class="text-lg font-display font-bold text-[#135c59] mb-1.5">Vaccinations & Care</h3>
-              <p class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Essential preventive immunizations administered by veterinary professionals at home.</p>
+              <h3 data-i18n="srv2_title" class="text-lg font-display font-bold text-[#135c59] mb-1.5">Vaccinations & Care</h3>
+              <p data-i18n="srv2_desc" class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Essential preventive immunizations administered by veterinary professionals at home.</p>
             </div>
           </div>
 
@@ -645,8 +634,8 @@
                   <i class="fa-solid fa-clock text-lg"></i>
                 </div>
               </div>
-              <h3 class="text-lg font-display font-bold text-[#135c59] mb-1.5">Regular Follow-ups</h3>
-              <p class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Ongoing monitoring and evaluation for post-treatment recovery and chronic conditions.</p>
+              <h3 data-i18n="srv3_title" class="text-lg font-display font-bold text-[#135c59] mb-1.5">Regular Follow-ups</h3>
+              <p data-i18n="srv3_desc" class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Ongoing monitoring and evaluation for post-treatment recovery and chronic conditions.</p>
             </div>
           </div>
 
@@ -657,10 +646,10 @@
                 <div class="w-11 h-11 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 flex items-center justify-center">
                   <i class="fa-solid fa-heart text-lg"></i>
                 </div>
-                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#135c59]/10 text-[#135c59] uppercase tracking-wider">Specialized</span>
+                <span data-i18n="srv_specialized" class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#135c59]/10 text-[#135c59] uppercase tracking-wider">Specialized</span>
               </div>
-              <h3 class="text-lg font-display font-bold text-[#135c59] mb-1.5">Specialized Nursing Care</h3>
-              <p class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Dedicated nursing support for senior pets and recovering animals requiring extra gentle care.</p>
+              <h3 data-i18n="srv4_title" class="text-lg font-display font-bold text-[#135c59] mb-1.5">Specialized Nursing Care</h3>
+              <p data-i18n="srv4_desc" class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Dedicated nursing support for senior pets and recovering animals requiring extra gentle care.</p>
             </div>
           </div>
 
@@ -672,8 +661,8 @@
                   <i class="fa-solid fa-scissors text-lg"></i>
                 </div>
               </div>
-              <h3 class="text-lg font-display font-bold text-[#135c59] mb-1.5">Hygienic Grooming</h3>
-              <p class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Gentle, stress-free grooming and sanitary care designed to keep pets clean and comfortable.</p>
+              <h3 data-i18n="srv5_title" class="text-lg font-display font-bold text-[#135c59] mb-1.5">Hygienic Grooming</h3>
+              <p data-i18n="srv5_desc" class="text-xs text-[#2d2420]/75 leading-relaxed mb-4">Gentle, stress-free grooming and sanitary care designed to keep pets clean and comfortable.</p>
             </div>
           </div>
 
@@ -681,11 +670,11 @@
 
         <div class="mt-6 p-4 rounded-2xl bg-[#135c59]/5 border border-[#135c59]/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div class="text-center sm:text-left">
-            <p class="text-xs font-bold text-[#135c59]">Need custom medical care for your pet?</p>
-            <p class="text-xs text-[#2d2420]/70">Contact us directly via WhatsApp for tailored visit planning.</p>
+            <p data-i18n="srv_custom_title" class="text-xs font-bold text-[#135c59]">Need custom medical care for your pet?</p>
+            <p data-i18n="srv_custom_desc" class="text-xs text-[#2d2420]/70">Contact us directly via WhatsApp for tailored visit planning.</p>
           </div>
           <button onclick="closeServicesModal(); openBookingModal();" class="btn-primary text-xs py-2.5 px-5 whitespace-nowrap">
-            Book Appointment Now
+            <span data-i18n="btn_book">Book Appointment Now</span>
           </button>
         </div>
       </div>
@@ -712,30 +701,28 @@
         
         <div id="article-content" class="text-[#2d2420]/80 leading-relaxed text-sm whitespace-pre-line space-y-4">
           <!-- Article Content Loaded via JS -->
-          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- EMBEDDED VANILLA JAVASCRIPT -->
   <script>
-    // Initialize Lucide Icons as fallback
     function refreshIcons() {
       if (typeof lucide !== 'undefined' && lucide.createIcons) {
         lucide.createIcons();
-        }
+      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       refreshIcons();
     });
 
-    // Mobile Navigation Menu Toggle Logic
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       const barsIcon = document.getElementById('menu-icon-bars');
       const closeIcon = document.getElementById('menu-icon-close');
-if (menu.classList.contains('hidden')) {
+      if (menu.classList.contains('hidden')) {
         menu.classList.remove('hidden');
         barsIcon.classList.add('hidden');
         closeIcon.classList.remove('hidden');
@@ -746,7 +733,6 @@ if (menu.classList.contains('hidden')) {
       }
     }
 
-    // Booking Modal Logic
     function openBookingModal() {
       const modal = document.getElementById('booking-modal');
       modal.classList.remove('hidden');
@@ -765,34 +751,32 @@ if (menu.classList.contains('hidden')) {
       }, 300);
     }
 
-    // Gender toggle in booking form
     let selectedGender = 'Male';
-    function setGender(gender) {
-      selectedGender = gender;
-      const maleBtn = 
-      document.getElementById('gender-male');
+    function setGender(genderVal) {
+      selectedGender = genderVal;
+      const genderInput = document.getElementById('gender-input');
+      if (genderInput) genderInput.value = genderVal;
+      
+      const maleBtn = document.getElementById('gender-male');
       const femaleBtn = document.getElementById('gender-female');
-
-      if (gender === 'Male') {
-        maleBtn.className = "py-3 px-2 rounded-xl border-2 border-[#135c59] text-xs font-bold text-white bg-[#135c59] transition-all shadow-sm";
-        femaleBtn.className = "py-3 px-2 rounded-xl border border-[#135c59]/20 text-xs font-bold text-[#135c59] bg-[#fbf9f5] transition-all";
-      } else {
-        femaleBtn.className = "py-3 px-2 rounded-xl border-2 border-[#135c59] text-xs font-bold text-white bg-[#135c59] transition-all shadow-sm";
-        maleBtn.className = "py-3 px-2 rounded-xl border border-[#135c59]/20 text-xs font-bold text-[#135c59] bg-[#fbf9f5] transition-all";
+      
+      if (maleBtn && femaleBtn) {
+        if (genderVal === 'Male') {
+          maleBtn.classList.add('bg-[#135c59]', 'text-white');
+          maleBtn.classList.remove('bg-[#fbf9f5]', 'text-[#135c59]');
+          femaleBtn.classList.remove('bg-[#135c59]', 'text-white');
+          femaleBtn.classList.add('bg-[#fbf9f5]', 'text-[#135c59]');
+        } else {
+          femaleBtn.classList.add('bg-[#135c59]', 'text-white');
+          femaleBtn.classList.remove('bg-[#fbf9f5]', 'text-[#135c59]');
+          maleBtn.classList.remove('bg-[#135c59]', 'text-white');
+          maleBtn.classList.add('bg-[#fbf9f5]', 'text-[#135c59]');
+        }
       }
-      }
-    setGender('Male');
-
-    function handleBookingSubmit(e) {
-      e.preventDefault();
-      document.getElementById('booking-form-container').classList.add('hidden');
-      document.getElementById('booking-success-container').classList.remove('hidden');
     }
 
-    // Services Modal Logic
     function openServicesModal() {
-      const modal = 
-      document.getElementById('services-modal');
+      const modal = document.getElementById('services-modal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
       document.body.style.overflow = 'hidden';
@@ -805,7 +789,6 @@ if (menu.classList.contains('hidden')) {
       document.body.style.overflow = '';
     }
 
-    // Articles Data for Knowledge Hub Reader
     const articles = {
       1: {
         category: 'Behavior',
@@ -874,55 +857,33 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
       modal.classList.remove('flex');
       document.body.style.overflow = '';
     }
-  </script>
-  <script>
-  function setGender(genderVal) {
-    const genderInput = document.getElementById('gender-input');
-    if (genderInput) genderInput.value = genderVal;
-    
-    const maleBtn = document.getElementById('gender-male');
-    const femaleBtn = document.getElementById('gender-female');
-    
-    if (maleBtn && femaleBtn) {
-      if (genderVal === 'Male') {
-        maleBtn.classList.add('bg-[#135c59]', 'text-white');
-        maleBtn.classList.remove('bg-[#fbf9f5]', 'text-[#135c59]');
-        femaleBtn.classList.remove('bg-[#135c59]', 'text-white');
-        femaleBtn.classList.add('bg-[#fbf9f5]', 'text-[#135c59]');
-      } else {
-        femaleBtn.classList.add('bg-[#135c59]', 'text-white');
-        femaleBtn.classList.remove('bg-[#fbf9f5]', 'text-[#135c59]');
-        maleBtn.classList.remove('bg-[#135c59]', 'text-white');
-        maleBtn.classList.add('bg-[#fbf9f5]', 'text-[#135c59]');
-      }
-    }
-  }
 
-  document.getElementById('booking-form')?.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('button[type="submit"]');
-    const originalText = btn ? btn.innerHTML : '';
-    if (btn) btn.innerHTML = "<span>Sending...</span>";
+    document.getElementById('booking-form')?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('button[type="submit"]');
+      const originalText = btn ? btn.innerHTML : '';
+      if (btn) btn.innerHTML = "<span>Sending...</span>";
 
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: new FormData(this)
-      });
-      const result = await response.json();
-      
-      if (result.success) {
-        alert("تم إرسال طلب الحجز بنجاح!");
-        this.reset();
-      } else {
-        alert("حدث خطأ أثناء الإرسال، حاول مرة أخرى.");
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: new FormData(this)
+        });
+        const result = await response.json();
+        
+        if (result.success) {
+          document.getElementById('booking-form-container').classList.add('hidden');
+          document.getElementById('booking-success-container').classList.remove('hidden');
+          this.reset();
+        } else {
+          alert("حدث خطأ أثناء الإرسال، حاول مرة أخرى.");
+        }
+      } catch (err) {
+        alert("خطأ في الاتصال بالسيرفر.");
+      } finally {
+        if (btn) btn.innerHTML = originalText;
       }
-    } catch (err) {
-      alert("خطأ في الاتصال بالسيرفر.");
-    } finally {
-      if (btn) btn.innerHTML = originalText;
-    }
-  });
+    });
   </script>
   
   <!-- SHOP MODAL -->
@@ -945,6 +906,7 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
           <input id="shop-search" type="search" placeholder="ابحث عن منتج..." oninput="filterShopProducts()" class="w-full rounded-2xl border border-[#135c59]/15 bg-white py-3 pr-11 pl-4 outline-none focus:border-[#135c59] text-sm">
         </div>
         <div id="shop-categories" class="mt-3 flex gap-2 overflow-x-auto pb-1"></div>
+      </div>
 
       <div id="shop-products" class="flex-1 overflow-y-auto px-5 sm:px-7 py-5">
         <div class="text-center py-12 text-[#2d2420]/60">جاري تحميل المنتجات...</div>
@@ -973,102 +935,96 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
     }
 
     async function loadShopProducts() {
-  const container = document.getElementById("shop-products");
+      const container = document.getElementById("shop-products");
 
-  try {
-    // اكتشاف مجلدات المنتجات تلقائيًا من GitHub
-    const folders = await fetch(
-      "https://api.github.com/repos/Furry4Ever/furry4ever.github.io/contents/shop/products?ref=main",
-      {
-        cache: "no-cache",
-        headers: {
-          "Accept": "application/vnd.github+json"
-        }
-      }
-    ).then(r => {
-      if (!r.ok) throw new Error("Products folder not found");
-      return r.json();
-    });
-
-    const productFolders = folders.filter(item => item.type === "dir");
-
-    const loaded = [];
-
-    for (const folder of productFolders) {
       try {
-        const data = await fetch(
-          `/shop/products/${encodeURIComponent(folder.name)}/product.json`,
-          { cache: "no-cache" }
+        const folders = await fetch(
+          "https://api.github.com/repos/Furry4Ever/furry4ever.github.io/contents/shop/products?ref=main",
+          {
+            cache: "no-cache",
+            headers: {
+              "Accept": "application/vnd.github+json"
+            }
+          }
         ).then(r => {
-          if (!r.ok) throw new Error("Product data not found");
+          if (!r.ok) throw new Error("Products folder not found");
           return r.json();
         });
 
-        loaded.push({
-          ...data,
-          slug: folder.name
-        });
+        const productFolders = folders.filter(item => item.type === "dir");
+        const loaded = [];
 
-      } catch (error) {
-        console.warn("Skipped product:", folder.name);
+        for (const folder of productFolders) {
+          try {
+            const data = await fetch(
+              `/shop/products/${encodeURIComponent(folder.name)}/product.json`,
+              { cache: "no-cache" }
+            ).then(r => {
+              if (!r.ok) throw new Error("Product data not found");
+              return r.json();
+            });
+
+            loaded.push({
+              ...data,
+              slug: folder.name
+            });
+
+          } catch (error) {
+            console.warn("Skipped product:", folder.name);
+          }
+        }
+
+        shopProducts = loaded;
+
+        renderShopCategories();
+        renderShopProducts();
+
+      } catch (err) {
+        console.error(err);
+
+        container.innerHTML =
+          `<div class="text-center py-12 text-red-600">
+            تعذر تحميل المنتجات حاليًا. حاول مرة أخرى.
+          </div>`;
       }
     }
 
-    shopProducts = loaded;
+    function renderShopCategories() {
+      const el = document.getElementById("shop-categories");
 
-    renderShopCategories();
-    renderShopProducts();
+      const categories = [
+        "All",
+        ...new Set(
+          shopProducts
+            .map(p => p.category)
+            .filter(Boolean)
+        )
+      ];
 
-  } catch (err) {
-    console.error(err);
+      el.innerHTML = "";
 
-    container.innerHTML =
-      `<div class="text-center py-12 text-red-600">
-        تعذر تحميل المنتجات حاليًا. حاول مرة أخرى.
-      </div>`;
-  }
-}
+      categories.forEach(category => {
+        const button = document.createElement("button");
 
-   function renderShopCategories() {
+        button.textContent =
+          category === "All"
+            ? "الكل"
+            : category;
 
-  const el = document.getElementById("shop-categories");
+        button.className =
+          `shop-category-btn shrink-0 rounded-full border px-4 py-2 text-xs font-bold transition-colors ${
+            activeShopCategory === category
+              ? "bg-[#135c59] text-white border-[#135c59]"
+              : "bg-white text-[#135c59] border-[#135c59]/15"
+          }`;
 
-  const categories = [
-    "All",
-    ...new Set(
-      shopProducts
-        .map(p => p.category)
-        .filter(Boolean)
-    )
-  ];
+        button.addEventListener("click", () => {
+          setShopCategory(category);
+        });
 
-  el.innerHTML = "";
-
-  categories.forEach(category => {
-
-    const button = document.createElement("button");
-
-    button.textContent =
-      category === "All"
-        ? "الكل"
-        : category;
-
-    button.className =
-      `shop-category-btn shrink-0 rounded-full border px-4 py-2 text-xs font-bold transition-colors ${
-        activeShopCategory === category
-          ? "bg-[#135c59] text-white border-[#135c59]"
-          : "bg-white text-[#135c59] border-[#135c59]/15"
-      }`;
-
-    button.addEventListener("click", () => {
-      setShopCategory(category);
-    });
-
-    el.appendChild(button);
-
-  });
-
-}
+        el.appendChild(button);
+      });
+    }
 
     function setShopCategory(category) {
       activeShopCategory = category;
@@ -1081,130 +1037,130 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
     }
 
     function renderShopProducts() {
-  const container = document.getElementById("shop-products");
-  const query = (document.getElementById("shop-search")?.value || "").trim().toLowerCase();
+      const container = document.getElementById("shop-products");
+      const query = (document.getElementById("shop-search")?.value || "").trim().toLowerCase();
 
-  const filtered = shopProducts.filter(p => {
-    const matchesCategory =
-      activeShopCategory === "All" ||
-      p.category === activeShopCategory;
+      const filtered = shopProducts.filter(p => {
+        const matchesCategory =
+          activeShopCategory === "All" ||
+          p.category === activeShopCategory;
 
-    const haystack =
-      `${p.name || ""} ${p.category || ""} ${p.description || ""}`.toLowerCase();
+        const haystack =
+          `${p.name || ""} ${p.category || ""} ${p.description || ""}`.toLowerCase();
 
-    return matchesCategory && haystack.includes(query);
-  });
+        return matchesCategory && haystack.includes(query);
+      });
 
-  if (!filtered.length) {
-    container.innerHTML =
-      `<div class="text-center py-12 text-[#2d2420]/60">
-        لا توجد منتجات مطابقة.
-      </div>`;
-    return;
-  }
+      if (!filtered.length) {
+        container.innerHTML =
+          `<div class="text-center py-12 text-[#2d2420]/60">
+            لا توجد منتجات مطابقة.
+          </div>`;
+        return;
+      }
 
-  container.innerHTML = filtered.map((p, i) => {
-    const available = p.available !== false;
-    const id = `shop-qty-${i}`;
+      container.innerHTML = filtered.map((p, i) => {
+        const available = p.available !== false;
+        const id = `shop-qty-${i}`;
 
-    const productUrl =
-      `/shop/product.html?slug=${encodeURIComponent(p.slug)}`;
+        const productUrl =
+          `/shop/product.html?slug=${encodeURIComponent(p.slug)}`;
 
-    const productImage =
-      `/shop/products/${encodeURIComponent(p.slug)}/${encodeURIComponent(p.image || "image.jpg")}`;
+        const productImage =
+          `/shop/products/${encodeURIComponent(p.slug)}/${encodeURIComponent(p.image || "image.jpg")}`;
 
-    return `
-      <article class="bg-white rounded-2xl border border-[#135c59]/10 overflow-hidden mb-4 shadow-sm">
+        return `
+          <article class="bg-white rounded-2xl border border-[#135c59]/10 overflow-hidden mb-4 shadow-sm">
 
-        <div class="flex gap-3 p-3 sm:p-4 items-center">
+            <div class="flex gap-3 p-3 sm:p-4 items-center">
 
-          <a href="${productUrl}"
-             target="_blank"
-             class="shrink-0 w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-[#fbf9f5] flex items-center justify-center overflow-hidden">
+              <a href="${productUrl}"
+                 target="_blank"
+                 class="shrink-0 w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-[#fbf9f5] flex items-center justify-center overflow-hidden">
 
-            <img
-              src="${productImage}"
-              alt="${escapeShopHtml(p.name)}"
-              class="w-full h-full object-contain">
-          </a>
+                <img
+                  src="${productImage}"
+                  alt="${escapeShopHtml(p.name)}"
+                  class="w-full h-full object-contain">
+              </a>
 
-          <div class="min-w-0 flex-1">
+              <div class="min-w-0 flex-1">
 
-            <a href="${productUrl}"
-               target="_blank"
-               class="font-extrabold text-[#135c59] hover:underline text-sm sm:text-base">
+                <a href="${productUrl}"
+                   target="_blank"
+                   class="font-extrabold text-[#135c59] hover:underline text-sm sm:text-base">
 
-              ${escapeShopHtml(p.name)}
+                  ${escapeShopHtml(p.name)}
 
-            </a>
+                </a>
 
-            ${
-              p.category
-                ? `<div class="text-[11px] text-[#2d2420]/50 mt-1">
-                    ${escapeShopHtml(p.category)}
-                   </div>`
-                : ""
-            }
+                ${
+                  p.category
+                    ? `<div class="text-[11px] text-[#2d2420]/50 mt-1">
+                        ${escapeShopHtml(p.category)}
+                       </div>`
+                    : ""
+                }
 
-            <div class="mt-3 flex flex-wrap items-center gap-2">
+                <div class="mt-3 flex flex-wrap items-center gap-2">
 
-              ${
-                available
-                  ? `
-                    <div class="flex items-center border border-[#135c59]/15 rounded-xl overflow-hidden bg-[#fbf9f5]">
+                  ${
+                    available
+                      ? `
+                        <div class="flex items-center border border-[#135c59]/15 rounded-xl overflow-hidden bg-[#fbf9f5]">
 
-                      <button
-                        onclick="changeShopQty('${id}', -1)"
-                        class="w-9 h-9 text-[#135c59] font-bold">
-                        −
-                      </button>
+                          <button
+                            onclick="changeShopQty('${id}', -1)"
+                            class="w-9 h-9 text-[#135c59] font-bold">
+                            −
+                          </button>
 
-                      <span
-                        id="${id}"
-                        class="w-8 text-center font-bold text-[#135c59]">
-                        1
-                      </span>
+                          <span
+                            id="${id}"
+                            class="w-8 text-center font-bold text-[#135c59]">
+                            1
+                          </span>
 
-                      <button
-                        onclick="changeShopQty('${id}', 1)"
-                        class="w-9 h-9 text-[#135c59] font-bold">
-                        +
-                      </button>
+                          <button
+                            onclick="changeShopQty('${id}', 1)"
+                            class="w-9 h-9 text-[#135c59] font-bold">
+                            +
+                          </button>
 
-                    </div>
+                        </div>
 
-                    <button
-                      onclick="orderShopProduct('${p.slug}', '${escapeJs(p.name)}', '${id}')"
-                      class="rounded-xl bg-[#135c59] text-white px-4 py-2 text-xs font-bold hover:opacity-90">
+                        <button
+                          onclick="orderShopProduct('${p.slug}', '${escapeJs(p.name)}', '${id}')"
+                          class="rounded-xl bg-[#135c59] text-white px-4 py-2 text-xs font-bold hover:opacity-90">
 
-                      <i class="fa-solid fa-cart-shopping ml-1"></i>
-                      طلب
+                          <i class="fa-solid fa-cart-shopping ml-1"></i>
+                          طلب
 
-                    </button>
-                  `
-                  : `
-                    <span class="rounded-xl bg-[#f1e7df] text-[#8a4b2a] px-3 py-2 text-xs font-bold">
-                      غير متوفر حاليًا
-                    </span>
-                  `
-              }
+                        </button>
+                      `
+                      : `
+                        <span class="rounded-xl bg-[#f1e7df] text-[#8a4b2a] px-3 py-2 text-xs font-bold">
+                          غير متوفر حاليًا
+                        </span>
+                      `
+                  }
 
-              <button
-                onclick="askShopProduct('${escapeJs(p.name)}')"
-                class="rounded-xl bg-[#eaf3f2] text-[#135c59] px-4 py-2 text-xs font-bold hover:bg-[#dceceb]">
+                  <button
+                    onclick="askShopProduct('${escapeJs(p.name)}')"
+                    class="rounded-xl bg-[#eaf3f2] text-[#135c59] px-4 py-2 text-xs font-bold hover:bg-[#dceceb]">
 
-                <i class="fa-regular fa-comment-dots ml-1"></i>
-                استفسار
+                    <i class="fa-regular fa-comment-dots ml-1"></i>
+                    استفسار
 
-              </button>
+                  </button>
 
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join("");
-}
+          </article>
+        `;
+      }).join("");
+    }
 
     function changeShopQty(id, delta) {
       const el = document.getElementById(id);
@@ -1233,12 +1189,11 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
 
     function escapeJs(value) {
       return String(value ?? "").replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/\r/g, "").replace(/\n/g, "\\n");
-        }
+    }
   </script>
 
-  <!-- ملف اللغة والترجمة -->
+  <!-- ملف اللغة والترجمة الخارجي -->
   <script src="language.js"></script>
 
 </body>
 </html>
-
