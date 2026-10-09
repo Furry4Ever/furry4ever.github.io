@@ -114,13 +114,11 @@
       transform: translateY(-2px);
     }
 
-    /* Modal Backdrop Blur */
     .modal-backdrop {
       background-color: rgba(45, 36, 32, 0.6);
       backdrop-filter: blur(8px);
     }
 
-    /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -191,7 +189,7 @@
           </button>
         </nav>
 
-        <!-- Right Action Items (Socials, Top Book & Main Language Button) -->
+        <!-- Right Action Items -->
         <div class="flex items-center gap-2 sm:gap-3">
           
           <div class="hidden sm:flex items-center gap-3">
@@ -219,7 +217,7 @@
             <span class="lang-btn-text">عربي</span>
           </button>
 
-          <!-- Mobile Menu Toggle Button (Hamburger ☰ Icon) -->
+          <!-- Mobile Menu Toggle Button -->
           <button onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu" class="md:hidden p-2 text-[#135c59] rounded-lg hover:bg-[#135c59]/10 focus:outline-none flex items-center justify-center">
             <i id="menu-icon-bars" class="fa-solid fa-bars text-2xl"></i>
             <i id="menu-icon-close" class="fa-solid fa-xmark text-2xl hidden"></i>
@@ -341,7 +339,7 @@
       </div>
     </section>
 
-    <!-- ABOUT / VALUE PROPOSITION SECTION -->
+    <!-- ABOUT SECTION -->
     <section id="about" class="py-16 bg-white/60 border-y border-[#135c59]/10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-12">
@@ -401,7 +399,7 @@
 
   </main>
 
-  <!-- BOTTOM INFORMATION BAR / FOOTER -->
+  <!-- FOOTER -->
   <footer class="bg-[#135c59] text-white pt-16 pb-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-3 gap-10 pb-12 border-b border-white/15">
@@ -441,7 +439,7 @@
           </ul>
         </div>
 
-        <!-- Right: Full Contact Information Bar -->
+        <!-- Right: Contact Bar -->
         <div>
           <h4 data-i18n="footer_contact_us" class="text-lg font-display font-bold mb-4 text-[#d9822b]">Contact Us</h4>
           <ul class="space-y-3.5 text-sm text-white/80">
@@ -468,15 +466,17 @@
 
       </div>
 
-      <!-- Copyright Bar -->
+      <!-- Copyright Bar Fix (محاذاة الكلمات والمبنى مع التوجيه المضبوط) -->
       <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-4">
-        <p data-i18n="footer_rights">&copy; 2026 Furry4Ever Pets Veterinary Care. All rights reserved.</p>
+        <p dir="auto">
+          &copy; <span dir="ltr">2026 Furry4Ever</span> <span data-i18n="footer_rights_text">Pets Veterinary Care. All rights reserved.</span>
+        </p>
         <p data-i18n="footer_motto" class="font-medium text-white/80">"These souls are our mission"</p>
       </div>
     </div>
   </footer>
 
-  <!-- MODAL: BOOKING FORM -->
+  <!-- MODAL: BOOKING FORM (تم إضافة خيار نوع الحيوان) -->
   <div id="booking-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
     <div onclick="closeBookingModal()" class="fixed inset-0 modal-backdrop"></div>
     
@@ -505,11 +505,23 @@
             <input type="text" name="owner_name" required data-i18n-placeholder="placeholder_owner" placeholder="Your Name" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
           </div>
 
+          <!-- Pet Type & Pet Name -->
           <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label data-i18n="form_pet_type" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Pet Type *</label>
+              <select name="pet_type" required class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm">
+                <option value="Cat" data-i18n="pet_type_cat">Cat</option>
+                <option value="Dog" data-i18n="pet_type_dog">Dog</option>
+                <option value="Other" data-i18n="pet_type_other">Other</option>
+              </select>
+            </div>
             <div>
               <label data-i18n="form_pet_name" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Pet Name *</label>
               <input type="text" name="pet_name" required data-i18n-placeholder="placeholder_pet" placeholder="e.g. Bella" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
             </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
             <div>
               <label data-i18n="form_gender" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Gender *</label>
               <input type="hidden" name="gender" id="gender-input" value="Male">
@@ -518,19 +530,15 @@
                 <button type="button" id="gender-female" onclick="setGender('Female')" data-i18n="form_female" class="py-3 px-2 rounded-xl border border-[#135c59]/20 text-xs font-bold text-[#135c59] bg-[#fbf9f5] transition-all">Female</button>
               </div>
             </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-4">
             <div>
               <label data-i18n="form_pet_age" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Pet Age *</label>
-              <input type="number" name="pet_age" required min="0" placeholder="e.g. 3" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
-            </div>
-            <div>
-              <label data-i18n="form_age_unit" class="block text-xs font-bold uppercase tracking-wider text-[#135c59] mb-1">Age Unit</label>
-              <select name="age_unit" class="w-full px-4 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm">
-                <option value="Years" data-i18n="unit_years">Years</option>
-                <option value="Months" data-i18n="unit_months">Months</option>
-              </select>
+              <div class="flex gap-2">
+                <input type="number" name="pet_age" required min="0" placeholder="e.g. 3" class="w-1/2 px-3 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm" />
+                <select name="age_unit" class="w-1/2 px-2 py-3 rounded-xl bg-[#fbf9f5] border border-[#135c59]/20 focus:outline-none focus:border-[#135c59] text-sm">
+                  <option value="Years" data-i18n="unit_years">Years</option>
+                  <option value="Months" data-i18n="unit_months">Months</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -599,7 +607,6 @@
       <div class="p-6 sm:p-8 max-h-[75vh] overflow-y-auto">
         <div class="grid sm:grid-cols-2 gap-4">
           
-          <!-- Service 1 -->
           <div class="p-5 rounded-2xl bg-[#fbf9f5] border border-[#135c59]/10 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
@@ -613,7 +620,6 @@
             </div>
           </div>
 
-          <!-- Service 2 -->
           <div class="p-5 rounded-2xl bg-[#fbf9f5] border border-[#135c59]/10 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
@@ -626,7 +632,6 @@
             </div>
           </div>
 
-          <!-- Service 3 -->
           <div class="p-5 rounded-2xl bg-[#fbf9f5] border border-[#135c59]/10 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
@@ -639,7 +644,6 @@
             </div>
           </div>
 
-          <!-- Service 4 -->
           <div class="p-5 rounded-2xl bg-[#fbf9f5] border border-[#135c59]/10 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
@@ -653,7 +657,6 @@
             </div>
           </div>
 
-          <!-- Service 5 -->
           <div class="p-5 rounded-2xl bg-[#fbf9f5] border border-[#135c59]/10 flex flex-col justify-between sm:col-span-2">
             <div>
               <div class="flex items-center justify-between mb-3">
@@ -681,32 +684,7 @@
     </div>
   </div>
 
-  <!-- MODAL: KNOWLEDGE ARTICLE READER -->
-  <div id="knowledge-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
-    <div onclick="closeKnowledgeModal()" class="fixed inset-0 modal-backdrop"></div>
-    
-    <div class="relative z-10 w-full max-w-2xl max-h-[80vh] bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col my-8">
-      <button onclick="closeKnowledgeModal()" class="absolute top-6 right-6 z-10 bg-white/80 hover:bg-white p-3 rounded-full text-[#135c59] transition-colors shadow-md">
-        <i class="fa-solid fa-xmark text-lg"></i>
-      </button>
-
-      <div class="overflow-y-auto p-8 md:p-10">
-        <div class="flex items-center gap-2 text-[#d9822b] text-xs font-bold uppercase tracking-wider mb-3">
-          <i class="fa-solid fa-book-open"></i>
-          <span id="article-meta">Category • Read Time</span>
-        </div>
-        <h3 id="article-title" class="text-2xl md:text-3xl font-display font-bold text-[#135c59] mb-6">
-          Article Title
-        </h3>
-        
-        <div id="article-content" class="text-[#2d2420]/80 leading-relaxed text-sm whitespace-pre-line space-y-4">
-          <!-- Article Content Loaded via JS -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- EMBEDDED VANILLA JAVASCRIPT -->
+  <!-- EMBEDDED JAVASCRIPT LOGIC -->
   <script>
     function refreshIcons() {
       if (typeof lucide !== 'undefined' && lucide.createIcons) {
@@ -789,75 +767,6 @@
       document.body.style.overflow = '';
     }
 
-    const articles = {
-      1: {
-        category: 'Behavior',
-        readTime: '5 min read',
-        title: 'Understanding Pet Body Language',
-        content: `Pets are masters of silent communication. While humans use words, animals use a complex system of tail wags, posture, and ear signals.
-
-1. The Tail: The Pet Mood Meter
-• Curved High Tail: A friendly "Hello!" They are happy and comfortable.
-• Slow Swish or Stiff Wag: Caution! Your pet is focused or evaluating a situation.
-• Tucked Tail: Fear or feeling overwhelmed. Needs gentle comfort.
-
-2. The Eyes & Ears
-• The Slow Blink: The ultimate sign of love and trust in cats and calm dogs.
-• Relaxed Ears: Content, happy, and feeling safe.
-
-The Knowledgeable Nugget: Understanding subtle body language helps prevent stress and builds a stronger bond with your pets!`
-      },
-      2: {
-        category: 'Health',
-        readTime: '8 min read',
-        title: 'Senior Pet Wellness & Routine Checks',
-        content: `As our pets age, their medical needs evolve. Pets over age 7-10 enter their golden years where preventive wellness checks make a huge difference in longevity and comfort.
-
-1. Why Regular Home Examinations Matter
-Pets naturally mask discomfort or pain. Routine home wellness exams allow veterinarians to evaluate mobility, dental health, kidney function, and heart health before small issues become emergencies.
-
-2. Key Diagnostic Health Indicators
-• Mobility & Joints: Watching for subtle stair-climbing changes or stiffness.
-• Kidney & Organ Health: Routine blood panels help manage chronic conditions early.
-• Hydration & Weight: Monitoring subtle changes in appetite or water intake.
-
-The Knowledgeable Nugget: Early routine health baseline checks give your senior pets years of active, comfortable life!`
-      },
-      3: {
-        category: 'Lifestyle',
-        readTime: '6 min read',
-        title: 'Creating a Stress-Free Pet Home Environment',
-        content: `To us, home is a refuge; to our pets, it is their entire world. Creating an enriched, pet-friendly home reduces anxiety and promotes natural wellness.
-
-1. Safe Rest & Hideaway Zones
-Ensure your pets have quiet, undisturbed sleeping nooks away from high-traffic household areas.
-2. Mental Enrichment
-Use puzzle feeders, interactive toys, and safe window perches to keep their minds engaged and active.
-
-The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune system and overall happiness!`
-      }
-    };
-
-    function openKnowledgeModal(id) {
-      const article = articles[id];
-      if (!article) return;
-
-      document.getElementById('article-meta').textContent = `${article.category} • ${article.readTime}`;
-      document.getElementById('article-title').textContent = article.title;
-      document.getElementById('article-content').textContent = article.content;
-      const modal = document.getElementById('knowledge-modal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeKnowledgeModal() {
-      const modal = document.getElementById('knowledge-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      document.body.style.overflow = '';
-    }
-
     document.getElementById('booking-form')?.addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = this.querySelector('button[type="submit"]');
@@ -886,14 +795,14 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
     });
   </script>
   
-  <!-- SHOP MODAL -->
+  <!-- SHOP MODAL (مصلح بالكامل لدعم كائنات الأسماء والنصوص العادية بدون توقف) -->
   <div id="shop-modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="shop-title">
     <div class="absolute inset-0 bg-[#2d2420]/50 backdrop-blur-sm" onclick="closeShopModal()"></div>
     <div class="relative w-full max-w-5xl max-h-[92vh] overflow-hidden rounded-3xl bg-[#fbf9f5] shadow-2xl flex flex-col">
       <div class="flex items-center justify-between gap-4 px-5 py-4 sm:px-7 border-b border-[#135c59]/10 bg-[#fbf9f5]">
         <div>
           <h2 id="shop-title" class="text-xl sm:text-2xl font-extrabold text-[#135c59]">Furry4Ever Shop</h2>
-          <p class="text-xs sm:text-sm text-[#2d2420]/60 mt-1">اختر المنتج والكمية ثم اضغط طلب أو استفسار</p>
+          <p class="text-xs sm:text-sm text-[#2d2420]/60 mt-1" data-i18n="shop_sub">اختر المنتج والكمية ثم اضغط طلب أو استفسار</p>
         </div>
         <button onclick="closeShopModal()" aria-label="Close Shop" class="w-10 h-10 rounded-full bg-[#135c59]/10 text-[#135c59] flex items-center justify-center hover:bg-[#135c59]/20">
           <i class="fa-solid fa-xmark text-lg"></i>
@@ -903,13 +812,13 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
       <div class="px-5 sm:px-7 pt-4">
         <div class="relative">
           <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-[#135c59]/50"></i>
-          <input id="shop-search" type="search" placeholder="ابحث عن منتج..." oninput="filterShopProducts()" class="w-full rounded-2xl border border-[#135c59]/15 bg-white py-3 pr-11 pl-4 outline-none focus:border-[#135c59] text-sm">
+          <input id="shop-search" type="search" data-i18n-placeholder="placeholder_search" placeholder="ابحث عن منتج..." oninput="filterShopProducts()" class="w-full rounded-2xl border border-[#135c59]/15 bg-white py-3 pr-11 pl-4 outline-none focus:border-[#135c59] text-sm">
         </div>
         <div id="shop-categories" class="mt-3 flex gap-2 overflow-x-auto pb-1"></div>
       </div>
 
       <div id="shop-products" class="flex-1 overflow-y-auto px-5 sm:px-7 py-5">
-        <div class="text-center py-12 text-[#2d2420]/60">جاري تحميل المنتجات...</div>
+        <div class="text-center py-12 text-[#2d2420]/60" data-i18n="loading_products">جاري تحميل المنتجات...</div>
       </div>
     </div>
   </div>
@@ -918,6 +827,14 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
     const SHOP_WHATSAPP = "201124333193";
     let shopProducts = [];
     let activeShopCategory = "All";
+
+    function getProductField(field, lang) {
+      if (!field) return "";
+      if (typeof field === "object") {
+        return field[lang] || field["ar"] || field["en"] || "";
+      }
+      return String(field);
+    }
 
     function openShopModal() {
       const modal = document.getElementById("shop-modal");
@@ -942,9 +859,7 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
           "https://api.github.com/repos/Furry4Ever/furry4ever.github.io/contents/shop/products?ref=main",
           {
             cache: "no-cache",
-            headers: {
-              "Accept": "application/vnd.github+json"
-            }
+            headers: { "Accept": "application/vnd.github+json" }
           }
         ).then(r => {
           if (!r.ok) throw new Error("Products folder not found");
@@ -968,39 +883,33 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
               ...data,
               slug: folder.name
             });
-
           } catch (error) {
             console.warn("Skipped product:", folder.name);
           }
         }
 
         shopProducts = loaded;
-
         renderShopCategories();
         renderShopProducts();
 
       } catch (err) {
         console.error(err);
-
         container.innerHTML =
-          `<div class="text-center py-12 text-red-600">
-            تعذر تحميل المنتجات حاليًا. حاول مرة أخرى.
-          </div>`;
+          `<div class="text-center py-12 text-red-600">تعذر تحميل المنتجات حاليًا. حاول مرة أخرى.</div>`;
       }
     }
 
     function renderShopCategories() {
       const el = document.getElementById("shop-categories");
+      const lang = typeof currentLang !== 'undefined' ? currentLang : 'ar';
 
-      const categories = [
-        "All",
-        ...new Set(
-          shopProducts
-            .map(p => p.category)
-            .filter(Boolean)
-        )
-      ];
+      const catSet = new Set();
+      shopProducts.forEach(p => {
+        const c = getProductField(p.category, lang);
+        if (c) catSet.add(c);
+      });
 
+      const categories = ["All", ...Array.from(catSet)];
       el.innerHTML = "";
 
       categories.forEach(category => {
@@ -1008,7 +917,7 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
 
         button.textContent =
           category === "All"
-            ? "الكل"
+            ? (lang === 'en' ? "All" : "الكل")
             : category;
 
         button.className =
@@ -1039,23 +948,22 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
     function renderShopProducts() {
       const container = document.getElementById("shop-products");
       const query = (document.getElementById("shop-search")?.value || "").trim().toLowerCase();
+      const lang = typeof currentLang !== 'undefined' ? currentLang : 'ar';
 
       const filtered = shopProducts.filter(p => {
-        const matchesCategory =
-          activeShopCategory === "All" ||
-          p.category === activeShopCategory;
+        const pName = getProductField(p.name, lang);
+        const pCat = getProductField(p.category, lang);
+        const pDesc = getProductField(p.description, lang);
 
-        const haystack =
-          `${p.name || ""} ${p.category || ""} ${p.description || ""}`.toLowerCase();
+        const matchesCategory = activeShopCategory === "All" || pCat === activeShopCategory;
+        const haystack = `${pName || ""} ${pCat || ""} ${pDesc || ""}`.toLowerCase();
 
         return matchesCategory && haystack.includes(query);
       });
 
       if (!filtered.length) {
         container.innerHTML =
-          `<div class="text-center py-12 text-[#2d2420]/60">
-            لا توجد منتجات مطابقة.
-          </div>`;
+          `<div class="text-center py-12 text-[#2d2420]/60">${lang === 'en' ? 'No products found.' : 'لا توجد منتجات مطابقة.'}</div>`;
         return;
       }
 
@@ -1063,116 +971,59 @@ The Knowledgeable Nugget: A low-stress home environment boosts your pet's immune
         const available = p.available !== false;
         const id = `shop-qty-${i}`;
 
-        const productUrl =
-          `/shop/product.html?slug=${encodeURIComponent(p.slug)}`;
+        const pName = getProductField(p.name, lang);
+        const pCat = getProductField(p.category, lang);
 
-        const productImage =
-          `/shop/products/${encodeURIComponent(p.slug)}/${encodeURIComponent(p.image || "image.jpg")}`;
+        const productUrl = `/shop/product.html?slug=${encodeURIComponent(p.slug)}`;
+        const productImage = `/shop/products/${encodeURIComponent(p.slug)}/${encodeURIComponent(p.image || "image.jpg")}`;
 
         return `
           <article class="bg-white rounded-2xl border border-[#135c59]/10 overflow-hidden mb-4 shadow-sm">
-
             <div class="flex gap-3 p-3 sm:p-4 items-center">
 
-              <a href="${productUrl}"
-                 target="_blank"
-                 class="shrink-0 w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-[#fbf9f5] flex items-center justify-center overflow-hidden">
-
-                <img
-                  src="${productImage}"
-                  alt="${escapeShopHtml(p.name)}"
-                  class="w-full h-full object-contain">
+              <a href="${productUrl}" target="_blank" class="shrink-0 w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-[#fbf9f5] flex items-center justify-center overflow-hidden">
+                <img src="${productImage}" alt="${escapeShopHtml(pName)}" class="w-full h-full object-contain">
               </a>
 
               <div class="min-w-0 flex-1">
-
-                <a href="${productUrl}"
-                   target="_blank"
-                   class="font-extrabold text-[#135c59] hover:underline text-sm sm:text-base">
-
-                  ${escapeShopHtml(p.name)}
-
+                <a href="${productUrl}" target="_blank" class="font-extrabold text-[#135c59] hover:underline text-sm sm:text-base">
+                  ${escapeShopHtml(pName)}
                 </a>
 
-                ${
-                  p.category
-                    ? `<div class="text-[11px] text-[#2d2420]/50 mt-1">
-                        ${escapeShopHtml(p.category)}
-                       </div>`
-                    : ""
-                }
+                ${pCat ? `<div class="text-[11px] text-[#2d2420]/50 mt-1">${escapeShopHtml(pCat)}</div>` : ""}
 
-function renderShopProducts() {
-  const container = document.getElementById("shop-products");
-  const query = (document.getElementById("shop-search")?.value || "").trim().toLowerCase();
+                <div class="mt-3 flex flex-wrap items-center gap-2">
+                  ${
+                    available
+                      ? `
+                        <div class="flex items-center border border-[#135c59]/15 rounded-xl overflow-hidden bg-[#fbf9f5]">
+                          <button onclick="changeShopQty('${id}', -1)" class="w-9 h-9 text-[#135c59] font-bold">−</button>
+                          <span id="${id}" class="w-8 text-center font-bold text-[#135c59]">1</span>
+                          <button onclick="changeShopQty('${id}', 1)" class="w-9 h-9 text-[#135c59] font-bold">+</button>
+                        </div>
 
-  // لمعرفة اللغة الحالية المحددة في الموقع (ar أو en)
-  const lang = typeof currentLang !== 'undefined' ? currentLang : 'ar';
+                        <button onclick="orderShopProduct('${p.slug}', '${escapeJs(pName)}', '${id}')" class="rounded-xl bg-[#135c59] text-white px-4 py-2 text-xs font-bold hover:opacity-90">
+                          <i class="fa-solid fa-cart-shopping ml-1"></i> ${lang === 'en' ? 'Order' : 'طلب'}
+                        </button>
+                      `
+                      : `
+                        <span class="rounded-xl bg-[#f1e7df] text-[#8a4b2a] px-3 py-2 text-xs font-bold">
+                          ${lang === 'en' ? 'Out of Stock' : 'غير متوفر حاليًا'}
+                        </span>
+                      `
+                  }
 
-  const filtered = shopProducts.filter(p => {
-    // جلب الاسم والتصنيف حسب اللغة الحالية
-    const pName = typeof p.name === 'object' ? (p.name[lang] || p.name['ar']) : p.name;
-    const pCat = typeof p.category === 'object' ? (p.category[lang] || p.category['ar']) : p.category;
-    const pDesc = typeof p.description === 'object' ? (p.description[lang] || p.description['ar']) : p.description;
-
-    const matchesCategory = activeShopCategory === "All" || pCat === activeShopCategory;
-    const haystack = `${pName || ""} ${pCat || ""} ${pDesc || ""}`.toLowerCase();
-
-    return matchesCategory && haystack.includes(query);
-  });
-
-  if (!filtered.length) {
-    container.innerHTML = `<div class="text-center py-12 text-[#2d2420]/60">${lang === 'en' ? 'No products found.' : 'لا توجد منتجات مطابقة.'}</div>`;
-    return;
-  }
-
-  container.innerHTML = filtered.map((p, i) => {
-    const available = p.available !== false;
-    const id = `shop-qty-${i}`;
-    
-    // إظهار النصوص حسب اللغة المحددة
-    const productName = typeof p.name === 'object' ? (p.name[lang] || p.name['ar']) : p.name;
-    const productCat = typeof p.category === 'object' ? (p.category[lang] || p.category['ar']) : p.category;
-
-    const productUrl = `/shop/product.html?slug=${encodeURIComponent(p.slug)}`;
-    const productImage = `/shop/products/${encodeURIComponent(p.slug)}/${encodeURIComponent(p.image || "image.jpg")}`;
-
-    return `
-      <article class="bg-white rounded-2xl border border-[#135c59]/10 overflow-hidden mb-4 shadow-sm">
-        <div class="flex gap-3 p-3 sm:p-4 items-center">
-          <a href="${productUrl}" target="_blank" class="shrink-0 w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-[#fbf9f5] flex items-center justify-center overflow-hidden">
-            <img src="${productImage}" alt="${escapeShopHtml(productName)}" class="w-full h-full object-contain">
-          </a>
-          <div class="min-w-0 flex-1">
-            <a href="${productUrl}" target="_blank" class="font-extrabold text-[#135c59] hover:underline text-sm sm:text-base">
-              ${escapeShopHtml(productName)}
-            </a>
-            ${productCat ? `<div class="text-[11px] text-[#2d2420]/50 mt-1">${escapeShopHtml(productCat)}</div>` : ""}
-            <div class="mt-3 flex flex-wrap items-center gap-2">
-              ${available ? `
-                <div class="flex items-center border border-[#135c59]/15 rounded-xl overflow-hidden bg-[#fbf9f5]">
-                  <button onclick="changeShopQty('${id}', -1)" class="w-9 h-9 text-[#135c59] font-bold">−</button>
-                  <span id="${id}" class="w-8 text-center font-bold text-[#135c59]">1</span>
-                  <button onclick="changeShopQty('${id}', 1)" class="w-9 h-9 text-[#135c59] font-bold">+</button>
+                  <button onclick="askShopProduct('${escapeJs(pName)}')" class="rounded-xl bg-[#eaf3f2] text-[#135c59] px-4 py-2 text-xs font-bold hover:bg-[#dceceb]">
+                    <i class="fa-regular fa-comment-dots ml-1"></i> ${lang === 'en' ? 'Inquire' : 'استفسار'}
+                  </button>
                 </div>
-                <button onclick="orderShopProduct('${p.slug}', '${escapeJs(productName)}', '${id}')" class="rounded-xl bg-[#135c59] text-white px-4 py-2 text-xs font-bold hover:opacity-90">
-                  <i class="fa-solid fa-cart-shopping ml-1"></i> ${lang === 'en' ? 'Order' : 'طلب'}
-                </button>` : `
-                <span class="rounded-xl bg-[#f1e7df] text-[#8a4b2a] px-3 py-2 text-xs font-bold">
-                  ${lang === 'en' ? 'Out of Stock' : 'غير متوفر حالياً'}
-                </span>`
-              }
-              <button onclick="askShopProduct('${escapeJs(productName)}')" class="rounded-xl bg-[#eaf3f2] text-[#135c59] px-4 py-2 text-xs font-bold hover:bg-[#dceceb]">
-                <i class="fa-regular fa-comment-dots ml-1"></i> ${lang === 'en' ? 'Inquire' : 'استفسار'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join("");
-}
+              </div>
 
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
 
     function changeShopQty(id, delta) {
       const el = document.getElementById(id);
@@ -1204,7 +1055,7 @@ function renderShopProducts() {
     }
   </script>
 
-  <!-- ملف اللغة والترجمة الخارجي -->
+  <!-- External Language Module -->
   <script src="language.js"></script>
 
 </body>
