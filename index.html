@@ -466,7 +466,7 @@
 
       </div>
 
-      <!-- Copyright Bar Fix (محاذاة الكلمات والمبنى مع التوجيه المضبوط) -->
+      <!-- Copyright Bar -->
       <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-4">
         <p dir="auto">
           &copy; <span dir="ltr">2026 Furry4Ever</span> <span data-i18n="footer_rights_text">Pets Veterinary Care. All rights reserved.</span>
@@ -476,7 +476,7 @@
     </div>
   </footer>
 
-  <!-- MODAL: BOOKING FORM (تم إضافة خيار نوع الحيوان) -->
+  <!-- MODAL: BOOKING FORM -->
   <div id="booking-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
     <div onclick="closeBookingModal()" class="fixed inset-0 modal-backdrop"></div>
     
@@ -795,14 +795,14 @@
     });
   </script>
   
-  <!-- SHOP MODAL (مصلح بالكامل لدعم كائنات الأسماء والنصوص العادية بدون توقف) -->
+  <!-- SHOP MODAL -->
   <div id="shop-modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="shop-title">
     <div class="absolute inset-0 bg-[#2d2420]/50 backdrop-blur-sm" onclick="closeShopModal()"></div>
     <div class="relative w-full max-w-5xl max-h-[92vh] overflow-hidden rounded-3xl bg-[#fbf9f5] shadow-2xl flex flex-col">
       <div class="flex items-center justify-between gap-4 px-5 py-4 sm:px-7 border-b border-[#135c59]/10 bg-[#fbf9f5]">
         <div>
           <h2 id="shop-title" class="text-xl sm:text-2xl font-extrabold text-[#135c59]">Furry4Ever Shop</h2>
-          <p class="text-xs sm:text-sm text-[#2d2420]/60 mt-1" data-i18n="shop_sub">اختر المنتج والكمية ثم اضغط طلب أو استفسار</p>
+          <p data-i18n="shop_sub" class="text-xs sm:text-sm text-[#2d2420]/60 mt-1">Select a product and quantity then click Order or Inquire</p>
         </div>
         <button onclick="closeShopModal()" aria-label="Close Shop" class="w-10 h-10 rounded-full bg-[#135c59]/10 text-[#135c59] flex items-center justify-center hover:bg-[#135c59]/20">
           <i class="fa-solid fa-xmark text-lg"></i>
@@ -812,13 +812,13 @@
       <div class="px-5 sm:px-7 pt-4">
         <div class="relative">
           <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-[#135c59]/50"></i>
-          <input id="shop-search" type="search" data-i18n-placeholder="placeholder_search" placeholder="ابحث عن منتج..." oninput="filterShopProducts()" class="w-full rounded-2xl border border-[#135c59]/15 bg-white py-3 pr-11 pl-4 outline-none focus:border-[#135c59] text-sm">
+          <input id="shop-search" type="search" data-i18n-placeholder="placeholder_search" placeholder="Search for a product..." oninput="filterShopProducts()" class="w-full rounded-2xl border border-[#135c59]/15 bg-white py-3 pr-11 pl-4 outline-none focus:border-[#135c59] text-sm">
         </div>
         <div id="shop-categories" class="mt-3 flex gap-2 overflow-x-auto pb-1"></div>
       </div>
 
       <div id="shop-products" class="flex-1 overflow-y-auto px-5 sm:px-7 py-5">
-        <div class="text-center py-12 text-[#2d2420]/60" data-i18n="loading_products">جاري تحميل المنتجات...</div>
+        <div data-i18n="loading_products" class="text-center py-12 text-[#2d2420]/60">Loading products...</div>
       </div>
     </div>
   </div>
