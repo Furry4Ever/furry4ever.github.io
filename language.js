@@ -96,12 +96,18 @@ const translations = {
     srv_custom_desc: "Contact us directly via WhatsApp for tailored visit planning.",
 
     // Shop Modal & Cart
-    shop_sub: "Select products and quantities, then send your order via WhatsApp",
+    shop_sub: "Select products and quantities, review your cart, and submit your order",
     placeholder_search: "Search for a product...",
     loading_products: "Loading products...",
     btn_add_cart: "Add to Order",
     cart_items_selected: "Selected Items:",
-    btn_send_whatsapp_order: "Send Order via WhatsApp"
+    btn_review_order: "View Order",
+    btn_submit_order: "Submit Order",
+    cart_modal_title: "Your Order Summary",
+    cart_empty: "Your cart is empty.",
+    cart_customer_info: "Customer Information",
+    shop_success_title: "Order Submitted Successfully!",
+    shop_success_desc: "Thank you for your order! Our team will contact you shortly to confirm the items and delivery details."
   },
 
   ar: {
@@ -201,12 +207,18 @@ const translations = {
     srv_custom_desc: "تواصل معنا مباشرة عبر الواتساب لتنسيق زيارة مخصصة.",
 
     // Shop Modal & Cart
-    shop_sub: "اختر المنتجات والكميات، ثم أرسل الطلب دفعة واحدة عبر الواتساب",
+    shop_sub: "اختر المنتجات والكميات، ثم راجع طلبك وأرسله بكل سهولة",
     placeholder_search: "ابحث عن منتج...",
     loading_products: "جاري تحميل المنتجات...",
     btn_add_cart: "إضافة للطلب",
     cart_items_selected: "المنتجات المحددة:",
-    btn_send_whatsapp_order: "إرسال الطلب عبر الواتساب"
+    btn_review_order: "معاينة وتعديل الطلب",
+    btn_submit_order: "إرسال الطلب",
+    cart_modal_title: "تفاصيل طلب المشتريات",
+    cart_empty: "السلة فارغة حالياً.",
+    cart_customer_info: "بيانات التواصل لإتمام الطلب",
+    shop_success_title: "تم إرسال طلبك بنجاح!",
+    shop_success_desc: "شكراً لتسوقك من Furry4Ever! سيتواصل معك فريقنا قريباً لتأكيد طلبك وتفاصيل التوصيل."
   }
 };
 
@@ -242,7 +254,7 @@ function setLanguage(lang) {
     btn.textContent = translations[lang].lang_btn;
   });
 
-  // 5. إعادة تحديث أقسام المنتجات وشريط السلة في المتجر إذا كان مفتوحاً
+  // 5. إعادة تحديث أقسام المنتجات وشريط السلة
   if (typeof renderShopCategories === 'function' && typeof renderShopProducts === 'function' && typeof shopProducts !== 'undefined' && shopProducts.length > 0) {
     renderShopCategories();
     renderShopProducts();
