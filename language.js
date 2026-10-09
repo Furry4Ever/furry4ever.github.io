@@ -116,7 +116,7 @@ const translations = {
     about_desc: "نعلم أن الذهاب للعيادات قد يكون مرهقاً لأليفك. فريقنا البيطري يقدم الفحوصات الطبية، التطعيمات، والرعاية التمريضية المتخصصة مباشرة في منزلك.",
 
     // Why Furry4Ever Section
-    why_tag: "لماذا فورري فور إيفر؟",
+    why_tag: "؟Furry4Ever لماذا",
     why_title: "الرعاية، الراحة والثقة",
     why_card1_title: "رعاية بيطرية احترافية",
     why_card1_desc: "خدمة بيطرية متكاملة تراعي راحة أليفك وسلامته أولاً.",
@@ -128,12 +128,12 @@ const translations = {
     why_card4_desc: "احجز زيارتك أو استفسر عن أي شيء بسهولة عبر الواتساب.",
 
     // Footer
-    footer_desc: "مكرسون لصحة، راحة، وسلامة أليفك دائماً.",
+    footer_desc: "مخصصة لصحة، راحة، وسلامة أليفك دائماً.",
     footer_quick_links: "روابط سريعة",
     footer_contact_us: "تواصل معنا",
     footer_location: "القاهرة، مصر",
     footer_whatsapp_direct: "حجز مباشر عبر الواتساب",
-    footer_rights: "© 2026 فورري فور إيفر للرعاية البيطرية. جميع الحقوق محفوظة.",
+    footer_rights: "© 2026  للرعاية البيطرية. جميع الحقوق محفوظة Furry4Ever.",
     footer_motto: '"هذه الأرواح هي مهمتنا"',
 
     // Booking Modal
@@ -142,7 +142,7 @@ const translations = {
     modal_book_sub: "أدخل التفاصيل أدناه وسيتواصل معك فريقنا في أقرب وقت.",
     form_owner_name: "اسم المالك *",
     form_pet_name: "اسم الأليف *",
-    form_gender: "الجنس *",
+    form_gender: "جنس الأليف *",
     form_male: "ذكر",
     form_female: "أنثى",
     form_pet_age: "عمر الأليف *",
@@ -160,7 +160,7 @@ const translations = {
 
     // Booking Success Screen
     success_title: "تم استلام طلب الحجز بنجاح!",
-    success_desc: "شكراً لاختيارك فورري فور إيفر. سيتواصل معك منسق الرعاية البيطرية عبر الهاتف أو الواتساب قريباً لتأكيد الموعد.",
+    success_desc: "شكراً لاختيارك خدماتنا. سيتواصل معك منسق الرعاية البيطرية عبر الهاتف أو الواتساب قريباً لتأكيد الموعد.",
     btn_close: "إغلاق النافذة",
 
     // Services Modal
